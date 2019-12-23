@@ -54,3 +54,24 @@ exports.getPalette = async (req, res, next) => {
     });
   }
 };
+
+exports.updatePalette = async (req, res, next) => {
+  try {
+    const palette = Palette.findByIdAndUpdate(req.params.id, req.body, {
+      runValidators: true,
+      new: true
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        palette
+      }
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    });
+  }
+};
