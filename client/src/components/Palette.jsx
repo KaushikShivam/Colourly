@@ -14,13 +14,15 @@ const Palette = ({ palette: { colors } }) => {
 
   return (
     <div className="Palette">
-      <Slider
-        defaultValue={level}
-        min={100}
-        max={900}
-        step={100}
-        onChange={newLevel => setLevel(newLevel)}
-      />
+      <div className="slider">
+        <Slider
+          defaultValue={level}
+          min={100}
+          max={900}
+          step={100}
+          onChange={newLevel => setLevel(newLevel)}
+        />
+      </div>
       {/* navbar */}
       <div className="Palette-colors">{colorBoxes}</div>
       {/* footer */}
