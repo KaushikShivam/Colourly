@@ -4,6 +4,9 @@ const path = require('path');
 
 const app = express();
 
+// Import all the routers
+const paletteRouter = require('./routes/paletteRoutes');
+
 // Middleware for logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan);
@@ -13,6 +16,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json({ limit: '10kb' }));
 
 // All the routes will go here
+app.use('/api/v1/palette', paletteRouter);
 
 // Serve static assets in production - React
 if (process.env.NODE_ENV === 'production') {
