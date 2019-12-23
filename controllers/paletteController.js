@@ -57,7 +57,7 @@ exports.getPalette = async (req, res, next) => {
 
 exports.updatePalette = async (req, res, next) => {
   try {
-    const palette = Palette.findByIdAndUpdate(req.params.id, req.body, {
+    const palette = await Palette.findByIdAndUpdate(req.params.id, req.body, {
       runValidators: true,
       new: true
     });
@@ -67,6 +67,21 @@ exports.updatePalette = async (req, res, next) => {
       data: {
         palette
       }
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    });
+  }
+};
+
+exports.deletePalette = async (req, res, next) => {
+  try {
+    await Palette.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+      status: 'success',
+      data: null
     });
   } catch (err) {
     res.status(404).json({
