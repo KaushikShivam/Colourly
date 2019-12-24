@@ -8,6 +8,7 @@ const app = express();
 
 // Import all the routers
 const paletteRouter = require('./routes/paletteRoutes');
+const userRouter = require('./routes/userRoutes');
 
 // Middleware for logging
 if (process.env.NODE_ENV === 'development') {
@@ -19,6 +20,7 @@ app.use(express.json({ limit: '10kb' }));
 
 // All the routes will go here
 app.use('/api/v1/palettes', paletteRouter);
+app.use('/api/v1/users', userRouter);
 
 // Serve static assets in production - React
 if (process.env.NODE_ENV === 'production') {
