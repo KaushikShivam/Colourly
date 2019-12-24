@@ -1,5 +1,6 @@
 const Palette = require('./../models/paletteModel');
 const catchAsync = require('./../utils/catchAsync');
+const AppError = require('./../utils/AppError');
 
 exports.createPalette = catchAsync(async (req, res, next) => {
   const palette = await Palette.create(req.body);
@@ -27,6 +28,8 @@ exports.getAllPalettes = catchAsync(async (req, res, next) => {
 exports.getPalette = catchAsync(async (req, res, next) => {
   const palette = await Palette.findById(req.params.id);
 
+  if (!palette) return next(new AppError('No palette found with this ID', 404));
+
   res.status(200).json({
     status: 'success',
     data: {
@@ -41,6 +44,8 @@ exports.updatePalette = catchAsync(async (req, res, next) => {
     new: true
   });
 
+  if (!palette) return next(new AppError('No palette found with this ID', 404));
+
   res.status(200).json({
     status: 'success',
     data: {
@@ -50,7 +55,10 @@ exports.updatePalette = catchAsync(async (req, res, next) => {
 });
 
 exports.deletePalette = catchAsync(async (req, res, next) => {
-  await Palette.findByIdAndDelete(req.params.id);
+  const palette = await Palette.findByIdAndDelete(req.params.id);
+
+  if (!palette) return next(new AppError('No palette found with this ID', 404));
+
   res.status(204).json({
     status: 'success',
     data: null
