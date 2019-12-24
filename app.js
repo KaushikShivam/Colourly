@@ -1,6 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const AppError = require('./utils/AppError');
+const globalErrorMiddleware = require('./controllers/errorController');
 
 const app = express();
 
@@ -30,22 +32,11 @@ if (process.env.NODE_ENV === 'production') {
 
 // middleware for all the unhandled routes
 app.all('*', (req, res, next) => {
-  const err = new Error(`Can't find ${req.originalUrl} on this server`);
-  err.status = 'fail';
-  err.statusCode = 404;
   // If the next function recieves an argument, express will consider it as an error. It will then skip all the next middlewares and directly hit the error handling middleware
-  next(err);
+  next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 
 // GLobal error handling middleware
-app.use((err, req, res, next) => {
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'error';
-
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message
-  });
-});
+app.use(globalErrorMiddleware);
 
 module.exports = app;
