@@ -28,4 +28,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// middleware for all the unhandled routes
+app.all('*', (req, res, next) => {
+  res.status(404).json({
+    status: 'fail',
+    message: `Can't find ${req.originalUrl} on this server`
+  });
+});
+
 module.exports = app;
