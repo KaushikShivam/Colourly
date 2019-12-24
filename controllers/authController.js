@@ -11,7 +11,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     expiresIn: '90d'
   });
 
-  req.status(200).json({
+  res.status(200).json({
     status: 'success',
     token,
     data: {
