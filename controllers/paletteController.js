@@ -1,92 +1,58 @@
 const Palette = require('./../models/paletteModel');
+const catchAsync = require('./../utils/catchAsync');
 
-exports.createPalette = async (req, res, next) => {
-  try {
-    const palette = await Palette.create(req.body);
+exports.createPalette = catchAsync(async (req, res, next) => {
+  const palette = await Palette.create(req.body);
 
-    res.status(201).json({
-      status: 'success',
-      data: {
-        palette
-      }
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+  res.status(201).json({
+    status: 'success',
+    data: {
+      palette
+    }
+  });
+});
 
-exports.getAllPalettes = async (req, res, next) => {
-  try {
-    const palettes = await Palette.find();
+exports.getAllPalettes = catchAsync(async (req, res, next) => {
+  const palettes = await Palette.find();
 
-    res.status(200).json({
-      status: 'success',
-      results: palettes.count,
-      data: {
-        palettes
-      }
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    results: palettes.count,
+    data: {
+      palettes
+    }
+  });
+});
 
-exports.getPalette = async (req, res, next) => {
-  try {
-    const palette = await Palette.findById(req.params.id);
+exports.getPalette = catchAsync(async (req, res, next) => {
+  const palette = await Palette.findById(req.params.id);
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        palette
-      }
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    data: {
+      palette
+    }
+  });
+});
 
-exports.updatePalette = async (req, res, next) => {
-  try {
-    const palette = await Palette.findByIdAndUpdate(req.params.id, req.body, {
-      runValidators: true,
-      new: true
-    });
+exports.updatePalette = catchAsync(async (req, res, next) => {
+  const palette = await Palette.findByIdAndUpdate(req.params.id, req.body, {
+    runValidators: true,
+    new: true
+  });
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        palette
-      }
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    data: {
+      palette
+    }
+  });
+});
 
-exports.deletePalette = async (req, res, next) => {
-  try {
-    await Palette.findByIdAndDelete(req.params.id);
-    res.status(204).json({
-      status: 'success',
-      data: null
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+exports.deletePalette = catchAsync(async (req, res, next) => {
+  await Palette.findByIdAndDelete(req.params.id);
+  res.status(204).json({
+    status: 'success',
+    data: null
+  });
+});
