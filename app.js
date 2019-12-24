@@ -30,9 +30,21 @@ if (process.env.NODE_ENV === 'production') {
 
 // middleware for all the unhandled routes
 app.all('*', (req, res, next) => {
-  res.status(404).json({
-    status: 'fail',
-    message: `Can't find ${req.originalUrl} on this server`
+  const err = new Error(`Can't find ${req.originalUrl} on this server`);
+  err.status = 'fail';
+  err.statusCode = 404;
+  // If the next function recieves an argument, express will consider it as an error. It will then skip all the next middlewares and directly hit the error handling middleware
+  next(err);
+});
+
+// GLobal error handling middleware
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || 'error';
+
+  res.status(err.statusCode).json({
+    status: err.status,
+    message: err.message
   });
 });
 
