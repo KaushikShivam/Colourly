@@ -5,14 +5,14 @@ exports.createPalette = async (req, res, next) => {
     const palette = await Palette.create(req.body);
 
     res.status(201).json({
-      status: 'error',
+      status: 'success',
       data: {
         palette
       }
     });
   } catch (err) {
     res.status(400).json({
-      status: 'error',
+      status: 'fail',
       message: err
     });
   }
