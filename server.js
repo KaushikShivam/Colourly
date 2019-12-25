@@ -4,10 +4,10 @@ dotenv.config({ path: './config.env' });
 
 const app = require('./app');
 
-process.on('uncaughtException', () => {
-  console.log('Uncaught Exception');
-  process.exit(1);
-});
+// process.on('uncaughtException', () => {
+//   console.log('Uncaught Exception');
+//   process.exit(1);
+// });
 
 mongoose
   .connect(process.env.DATABASE, {
