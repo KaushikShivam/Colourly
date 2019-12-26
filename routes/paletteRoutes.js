@@ -5,13 +5,13 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(authController.protect, paletteController.getAllPalettes)
-  .post(paletteController.createPalette);
+  .get(paletteController.getAllPalettes)
+  .post(authController.protect, paletteController.createPalette);
 
 router
   .route('/:id')
   .get(paletteController.getPalette)
-  .patch(paletteController.updatePalette)
-  .delete(paletteController.deletePalette);
+  .patch(authController.protect, paletteController.updatePalette)
+  .delete(authController.protect, paletteController.deletePalette);
 
 module.exports = router;
