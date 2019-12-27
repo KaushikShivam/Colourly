@@ -18,8 +18,10 @@ const App = () => {
         path="/palette/:paletteId/:colorId"
         render={routeProps => (
           <SingleColorPalette
-            color
-            palette={generatePalette(findPalette(routeProps.match.params.id))}
+            colorId={routeProps.match.params.colorId}
+            palette={generatePalette(
+              findPalette(routeProps.match.params.paletteId)
+            )}
           />
         )}
       />

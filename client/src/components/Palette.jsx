@@ -13,6 +13,7 @@ const Palette = ({ palette: { colors, paletteName, emoji, id } }) => {
       name={color.name}
       key={color.id}
       moreUrl={`/palette/${id}/${color.id}`}
+      showLink={true}
     />
   ));
 
