@@ -15,6 +15,16 @@ const App = () => {
     <Switch>
       <Route
         exact
+        path="/palette/:paletteId/:colorId"
+        render={routeProps => (
+          <SingleColorPalette
+            color
+            palette={generatePalette(findPalette(routeProps.match.params.id))}
+          />
+        )}
+      />
+      <Route
+        exact
         path="/"
         render={routeProps => (
           <PaletteList palettes={seedColors} {...routeProps} />
@@ -24,16 +34,11 @@ const App = () => {
         exact
         path="/palette/:id"
         render={routeProps => (
-          // Move the generate palette in the palette detail
+          //TODO: Move the generate palette in the palette detail
           <Palette
             palette={generatePalette(findPalette(routeProps.match.params.id))}
           />
         )}
-      />
-      <Route
-        exact
-        path="/palette/:paletteId/:colorId"
-        render={() => <SingleColorPalette />}
       />
     </Switch>
   );
