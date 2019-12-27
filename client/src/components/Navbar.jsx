@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Slider from 'rc-slider';
+import { withStyles } from '@material-ui/styles';
+
 import { Link } from 'react-router-dom';
 
 import Select from '@material-ui/core/Select';
@@ -9,9 +11,15 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
 import 'rc-slider/assets/index.css';
-import './Navbar.css';
+import styles from './../styles/Navbar.styles';
 
-const Navbar = ({ level, changeLevel, handleChange, showingAllColors }) => {
+const Navbar = ({
+  level,
+  changeLevel,
+  handleChange,
+  showingAllColors,
+  classes
+}) => {
   const [format, setFormat] = useState('hex');
   const [open, setOpen] = useState(false);
 
@@ -24,14 +32,14 @@ const Navbar = ({ level, changeLevel, handleChange, showingAllColors }) => {
   const handleClose = () => setOpen(false);
 
   return (
-    <header className="Navbar">
-      <div className="logo">
+    <header className={classes.Navbar}>
+      <div className={classes.logo}>
         <Link to="/">Colourly</Link>
       </div>
       {showingAllColors && (
-        <div className="slider-container">
+        <div>
           <span>Level: {level}</span>
-          <div className="slider">
+          <div className={classes.slider}>
             <Slider
               defaultValue={level}
               min={100}
@@ -42,7 +50,7 @@ const Navbar = ({ level, changeLevel, handleChange, showingAllColors }) => {
           </div>
         </div>
       )}
-      <div className="select-container">
+      <div className={classes.selectContainer}>
         <Select value={format} onChange={handleSelect}>
           <MenuItem value="hex">HEX - #ffffff</MenuItem>
           <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
@@ -75,4 +83,4 @@ const Navbar = ({ level, changeLevel, handleChange, showingAllColors }) => {
   );
 };
 
-export default Navbar;
+export default withStyles(styles)(Navbar);
