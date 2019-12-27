@@ -9,14 +9,14 @@ const app = require('./app');
 //   process.exit(1);
 // });
 
-mongoose
-  .connect(process.env.DATABASE, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log('Database Connected'));
+// mongoose
+//   .connect(process.env.DATABASE, {
+//     useNewUrlParser: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//     useUnifiedTopology: true
+//   })
+//   .then(() => console.log('Database Connected'));
 
 const PORT = process.env.PORT || 8000;
 const server = app.listen(PORT, () =>
