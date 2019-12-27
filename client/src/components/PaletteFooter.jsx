@@ -1,0 +1,13 @@
+import React from 'react';
+
+const PaletteFooter = ({ paletteName, emoji }) => {
+  return (
+    <footer className="Palette-footer">
+      {/* TODO: Add User Link Here */}
+      {paletteName}
+      <span className="emoji">{emoji}</span>
+    </footer>
+  );
+};
+
+export default PaletteFooter;

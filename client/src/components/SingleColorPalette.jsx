@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
+import PaletteFooter from './PaletteFooter';
 
 const SingleColorPalette = ({ palette, colorId }) => {
   const [format, setFormat] = useState('hex');
@@ -34,6 +35,7 @@ const SingleColorPalette = ({ palette, colorId }) => {
     <div className="Palette">
       <Navbar handleChange={changeFormat} showingAllColors={false} />
       <div className="Palette-colors">{colorBoxes}</div>
+      <PaletteFooter paletteName={palette.paletteName} emoji={palette.emoji} />
     </div>
   );
 };
