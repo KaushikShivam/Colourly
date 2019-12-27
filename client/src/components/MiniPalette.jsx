@@ -8,13 +8,15 @@ const styles = {
     borderRadius: '5px',
     padding: '0.5rem',
     position: 'relative',
-    overflow: 'hidden',
     '&:hover': {
       cursor: 'pointer'
     }
   },
   colors: {
-    backgroundColor: 'grey'
+    backgroundColor: '#dae1e4',
+    height: '100px',
+    overflow: 'hidden',
+    borderRadius: '5px'
   },
   title: {
     display: 'flex',
@@ -28,14 +30,28 @@ const styles = {
   emoji: {
     marginLeft: '0.5rem',
     fontSize: '1.5rem'
+  },
+  miniColor: {
+    height: '25%',
+    width: '20%',
+    margin: '0 auto',
+    position: 'relative',
+    float: 'left'
   }
 };
 
-const MiniPalette = ({ classes, paletteName, emoji }) => {
+const MiniPalette = ({ classes, paletteName, emoji, colors }) => {
   // TODO: Add Creator link as well
+  const miniColorBoxes = colors.map(color => (
+    <div
+      className={classes.miniColor}
+      style={{ background: color.color }}
+      key={color.name}
+    />
+  ));
   return (
     <div className={classes.root}>
-      <div className={classes.colors}></div>
+      <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
         {paletteName} <span className={classes.emoji}>{emoji}</span>
       </h5>
