@@ -5,17 +5,7 @@ import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import PaletteFooter from './PaletteFooter';
 
-const styles = {
-  Palette: {
-    height: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'hidden'
-  },
-  PaletteColors: {
-    height: '90%'
-  }
-};
+import styles from './../styles/Palette.styles';
 
 const Palette = ({ palette: { colors, paletteName, emoji, id }, classes }) => {
   const [level, setLevel] = useState(500);
