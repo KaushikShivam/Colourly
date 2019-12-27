@@ -5,20 +5,28 @@ import Palette from './components/Palette';
 import seedColors from './seedColors';
 import { generatePalette } from './helpers/colorHelpers';
 
-function App() {
+const App = () => {
+  //TODO: use MongoDB here
+  const findPalette = id => seedColors.find(palette => palette.id === id);
+
   return (
     <Switch>
       <Route exact path="/" render={() => <h1>Palette list goes here</h1>} />
       <Route
         exact
-        path="palettes/:id"
-        render={() => <h1>Individual palette goes here</h1>}
+        path="/palette/:id"
+        render={routeProps => (
+          // Move the generate palette in the palette detail
+          <Palette
+            palette={generatePalette(findPalette(routeProps.match.params.id))}
+          />
+        )}
       />
     </Switch>
     // <div className="App">
     //   <Palette palette={generatePalette(seedColors[4])} />
     // </div>
   );
-}
+};
 
 export default App;
