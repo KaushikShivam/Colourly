@@ -8,7 +8,7 @@ const PaletteList = ({ palettes }) => {
     <div>
       <MiniPalette />
       {palettes.map(palette => (
-        <Link to={`/palette/${palette.id}`}>{palette.paletteName}</Link>
+        <MiniPalette {...palette} />
       ))}
     </div>
   );
