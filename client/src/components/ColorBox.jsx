@@ -139,10 +139,10 @@ const ColorBox = ({ background, name, moreUrl, showLink, classes }) => {
         ></div>
         <div
           className={`${classes.copyMsg} ${copied &&
-            classes.showCopyMsg} ${contrast && 'white-color'}`}
+            classes.showCopyMsg} ${contrast}`}
         >
-          <h1>copied!</h1>
-          <p>{background}</p>
+          <h1 className={contrast}>copied!</h1>
+          <p className={contrast}>{background}</p>
         </div>
         <div>
           <div className={classes.boxContent}>
