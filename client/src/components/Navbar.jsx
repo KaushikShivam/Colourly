@@ -11,7 +11,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import 'rc-slider/assets/index.css';
 import './Navbar.css';
 
-const Navbar = ({ level, changeLevel, handleChange }) => {
+const Navbar = ({ level, changeLevel, handleChange, showingAllColors }) => {
   const [format, setFormat] = useState('hex');
   const [open, setOpen] = useState(false);
 
@@ -28,18 +28,20 @@ const Navbar = ({ level, changeLevel, handleChange }) => {
       <div className="logo">
         <Link to="/">Colourly</Link>
       </div>
-      <div className="slider-container">
-        <span>Level: {level}</span>
-        <div className="slider">
-          <Slider
-            defaultValue={level}
-            min={100}
-            max={900}
-            step={100}
-            onChange={changeLevel}
-          />
+      {showingAllColors && (
+        <div className="slider-container">
+          <span>Level: {level}</span>
+          <div className="slider">
+            <Slider
+              defaultValue={level}
+              min={100}
+              max={900}
+              step={100}
+              onChange={changeLevel}
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className="select-container">
         <Select value={format} onChange={handleSelect}>
           <MenuItem value="hex">HEX - #ffffff</MenuItem>

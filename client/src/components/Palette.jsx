@@ -27,6 +27,7 @@ const Palette = ({ palette: { colors, paletteName, emoji, id } }) => {
         level={level}
         changeLevel={changeLevel}
         handleChange={changeFormat}
+        showingAllColors
       />
       <div className="Palette-colors">{colorBoxes}</div>
       <footer className="Palette-footer">
