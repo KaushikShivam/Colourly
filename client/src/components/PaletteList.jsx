@@ -6,7 +6,31 @@ import MiniPalette from './MiniPalette';
 
 const styles = {
   root: {
-    backgroundColor: 'blue'
+    backgroundColor: 'blue',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center'
+  },
+  container: {
+    width: '80%',
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+    flexWrap: 'wrap'
+  },
+  nav: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'space-between',
+    color: 'white'
+  },
+  palettes: {
+    boxSizing: 'border-box',
+    width: '100%',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gridGap: '2%'
   }
 };
 
@@ -14,7 +38,7 @@ const PaletteList = ({ palettes, classes }) => {
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        {/* TODO: Refactor and make this a global NAV */}
+        {/* TODO: Refactor and make this a global NAV, Take out the nav styles as well */}
         <nav className={classes.nav}>
           <h1>Colourly</h1>
         </nav>
