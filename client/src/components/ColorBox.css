@@ -31,7 +31,7 @@
   background: rgba(255, 255, 255, 0.3);
   font-size: 1rem;
   line-height: 30px;
-  color: white;
+  color: black;
   text-transform: uppercase;
   border: none;
   text-decoration: none;
@@ -64,7 +64,7 @@
   border: none;
   right: 0;
   bottom: 0;
-  color: white;
+  color: rgba(0, 0, 0, 0.726);
   width: 60px;
   height: 30px;
   text-align: center;
@@ -101,7 +101,7 @@
   font-size: 4rem;
   transform: scale(0.1);
   opacity: 0;
-  color: white;
+  color: black;
 }
 
 .copy-msg.show {
@@ -126,4 +126,8 @@
 .copy-msg p {
   font-size: 2rem;
   font-weight: 100;
+}
+
+.white-color {
+  color: white;
 }
