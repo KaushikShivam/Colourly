@@ -127,11 +127,14 @@ const NewPaletteForm = ({ savePalette, history }) => {
       paletteName: newName,
       id: newName.toLowerCase().replace(/ /g, '-')
     };
-    console.log(newPaletteName, newPalette);
 
     savePalette(newPalette);
     // Do this push only when you recieve success message from server
     history.push('/');
+  };
+
+  const removeColor = colorName => {
+    setNewColor(colors.filter(color => color.name !== colorName));
   };
 
   return (
@@ -228,7 +231,12 @@ const NewPaletteForm = ({ savePalette, history }) => {
       >
         <div className={classes.drawerHeader} />
         {colors.map(color => (
-          <DraggableColorBox color={color.color} name={color.name} />
+          <DraggableColorBox
+            key={color.name}
+            color={color.color}
+            name={color.name}
+            handleClick={() => removeColor(color.name)}
+          />
         ))}
       </main>
     </div>
