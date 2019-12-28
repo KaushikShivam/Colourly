@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -190,6 +191,11 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
             <Button type="submit" variant="contained" color="primary">
               Save Palette
             </Button>
+            <Link to="/">
+              <Button variant="contained" color="secondary">
+                Go Back
+              </Button>
+            </Link>
           </ValidatorForm>
         </Toolbar>
       </AppBar>
