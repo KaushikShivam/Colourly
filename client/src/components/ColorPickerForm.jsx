@@ -1,12 +1,25 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-
-import PaletteFormNav from './PaletteFormNav';
-
 import { ChromePicker } from 'react-color';
+import { withStyles } from '@material-ui/styles';
 
-const ColorPickerForm = ({ paletteFull, addNewColor, colors }) => {
+const styles = {
+  picker: {
+    marginTop: '2rem'
+  },
+  addColor: {
+    width: '100%',
+    marginTop: '.5rem',
+    fontSize: '1.5rem'
+  },
+  colorNameInput: {
+    width: '100%',
+    height: '70px'
+  }
+};
+
+const ColorPickerForm = ({ paletteFull, addNewColor, colors, classes }) => {
   const [currentColor, setColor] = useState('teal');
   const [newName, setNewName] = useState('');
 
@@ -37,8 +50,13 @@ const ColorPickerForm = ({ paletteFull, addNewColor, colors }) => {
   }, [colors, currentColor]);
 
   return (
-    <Fragment>
-      <ChromePicker color={currentColor} onChange={updateCurrentColor} />
+    <div>
+      <ChromePicker
+        color={currentColor}
+        onChange={updateCurrentColor}
+        width="100%"
+        className={classes.picker}
+      />
 
       <ValidatorForm onSubmit={handleSubmit}>
         <TextValidator
@@ -50,6 +68,10 @@ const ColorPickerForm = ({ paletteFull, addNewColor, colors }) => {
             'Color already used',
             'Color name should be unique'
           ]}
+          className={classes.colorNameInput}
+          variant="filled"
+          margin="normal"
+          placeholder="Color Name"
         />
         <Button
           variant="contained"
@@ -58,12 +80,13 @@ const ColorPickerForm = ({ paletteFull, addNewColor, colors }) => {
           style={{ backgroundColor: paletteFull ? 'grey' : currentColor }}
           type="submit"
           disabled={paletteFull}
+          className={classes.addColor}
         >
           {paletteFull ? 'Palette Full' : 'Add Color'}
         </Button>
       </ValidatorForm>
-    </Fragment>
+    </div>
   );
 };
 
-export default ColorPickerForm;
+export default withStyles(styles)(ColorPickerForm);
