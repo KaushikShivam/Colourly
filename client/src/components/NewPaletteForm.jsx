@@ -81,6 +81,7 @@ const NewPaletteForm = ({ savePalette, history }) => {
   const [open, setOpen] = useState(false);
   const [currentColor, setColor] = useState('teal');
   const [colors, setNewColor] = useState([]);
+  const [newPaletteName, setNewPaletteName] = useState('');
 
   const [newName, setNewName] = useState('');
 
@@ -120,12 +121,14 @@ const NewPaletteForm = ({ savePalette, history }) => {
 
   const handleSavePalette = () => {
     // TODO: Remove ID from here. MongoDB Will create it itself
-    const newName = 'New Test Palette';
+    const newName = newPaletteName;
     const newPalette = {
       colors: colors,
-      name: newName,
+      paletteName: newName,
       id: newName.toLowerCase().replace(/ /g, '-')
     };
+    console.log(newPaletteName, newPalette);
+
     savePalette(newPalette);
     // Do this push only when you recieve success message from server
     history.push('/');
@@ -154,13 +157,19 @@ const NewPaletteForm = ({ savePalette, history }) => {
           <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
-          <Button
-            onClick={handleSavePalette}
-            variant="contained"
-            color="primary"
-          >
-            Save Palette
-          </Button>
+          <ValidatorForm onSubmit={handleSavePalette}>
+            <TextValidator
+              value={newPaletteName}
+              label="Palette Name"
+              value={newPaletteName}
+              onChange={e => setNewPaletteName(e.target.value)}
+              validators={['required']}
+              errorMessages={['Enter Palette Name']}
+            />
+            <Button type="submit" variant="contained" color="primary">
+              Save Palette
+            </Button>
+          </ValidatorForm>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -204,6 +213,7 @@ const NewPaletteForm = ({ savePalette, history }) => {
           <Button
             variant="contained"
             color="primary"
+            name="newPaletteName"
             style={{ backgroundColor: currentColor }}
             type="submit"
           >
