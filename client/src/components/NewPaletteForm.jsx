@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 
 import Typography from '@material-ui/core/Typography';
@@ -15,8 +14,7 @@ import randomColor from 'randomcolor';
 
 import DraggableColorList from './DraggableColorList';
 import PaletteFormNav from './PaletteFormNav';
-
-import { ChromePicker } from 'react-color';
+import ColorPickerForm from './ColorPickerForm';
 
 const drawerWidth = 400;
 
@@ -82,21 +80,8 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
   const [open, setOpen] = useState(true);
   const [currentColor, setColor] = useState('teal');
   const [colors, setNewColor] = useState([]);
-  // const [newPaletteName, setNewPaletteName] = useState('');
 
   const [newName, setNewName] = useState('');
-
-  useEffect(() => {
-    ValidatorForm.addValidationRule('isColorNameUnique', value => {
-      return colors.every(
-        color => color.name.toLowerCase() !== value.toLowerCase()
-      );
-    });
-
-    ValidatorForm.addValidationRule('isColorUnique', value => {
-      return colors.every(color => color.color !== currentColor);
-    });
-  }, [colors, currentColor]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -106,28 +91,18 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
     setOpen(false);
   };
 
-  const updateCurrentColor = newColor => {
-    setColor(newColor.hex);
-  };
-
-  const addNewColor = () => {
-    const newColor = {
-      color: currentColor,
-      name: newName
-    };
+  const addNewColor = newColor => {
     setNewColor(oldColors => [...oldColors, newColor]);
   };
 
-  const handleChange = e => setNewName(e.target.value);
-
   const handleSavePalette = newPaletteName => {
     // TODO: Remove ID from here. MongoDB Will create it itself
-    // const newName = newPaletteName;
     const newPalette = {
       colors: colors,
-      paletteName: newName,
-      id: newName.toLowerCase().replace(/ /g, '-')
+      paletteName: newPaletteName,
+      id: newPaletteName.toLowerCase().replace(/ /g, '-')
     };
+    console.log(newPalette, newPaletteName);
 
     savePalette(newPalette);
     // Do this push only when you recieve success message from server
@@ -177,7 +152,6 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
           </IconButton>
         </div>
         <Divider />
-        {/* Color picker */}
         <Typography variant="h4">Design Your Palette</Typography>
         <div>
           <Button variant="contained" color="secondary" onClick={clearColors}>
@@ -192,30 +166,11 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
             Random Color
           </Button>
         </div>
-        <ChromePicker color={currentColor} onChange={updateCurrentColor} />
-
-        <ValidatorForm onSubmit={addNewColor}>
-          <TextValidator
-            value={newName}
-            onChange={handleChange}
-            validators={['required', 'isColorUnique', 'isColorNameUnique']}
-            errorMessages={[
-              'Provide a valid name',
-              'Color already used',
-              'Color name should be unique'
-            ]}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            name="newPaletteName"
-            style={{ backgroundColor: paletteFull ? 'grey' : currentColor }}
-            type="submit"
-            disabled={paletteFull}
-          >
-            {paletteFull ? 'Palette Full' : 'Add Color'}
-          </Button>
-        </ValidatorForm>
+        <ColorPickerForm
+          paletteFull={paletteFull}
+          addNewColor={addNewColor}
+          colors={colors}
+        />
       </Drawer>
       <main
         className={clsx(classes.content, {
