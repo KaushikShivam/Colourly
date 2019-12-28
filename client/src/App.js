@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Palette from './components/Palette';
@@ -9,12 +9,24 @@ import seedColors from './seedColors';
 import { generatePalette } from './helpers/colorHelpers';
 
 const App = () => {
+  // TODO: Don't need this state for now. This will be fetched from the rc-slider-dot-reverse
+  const [palettes, addPalettes] = useState(seedColors);
+
   //TODO: use MongoDB here
-  const findPalette = id => seedColors.find(palette => palette.id === id);
+  const findPalette = id => palettes.find(palette => palette.id === id);
+
+  // TODO: Use this to save it to DB instead. And move this back to newPalette form
+  const savePalette = newPalette => addPalettes([...palettes, newPalette]);
 
   return (
     <Switch>
-      <Route exact path="/palette/new" render={() => <NewPaletteForm />} />
+      <Route
+        exact
+        path="/palette/new"
+        render={routeProps => (
+          <NewPaletteForm savePalette={savePalette} {...routeProps} />
+        )}
+      />
       <Route
         exact
         path="/palette/:paletteId/:colorId"
@@ -31,7 +43,7 @@ const App = () => {
         exact
         path="/"
         render={routeProps => (
-          <PaletteList palettes={seedColors} {...routeProps} />
+          <PaletteList palettes={palettes} {...routeProps} />
         )}
       />
       <Route

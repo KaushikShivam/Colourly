@@ -76,15 +76,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NewPaletteForm = () => {
-  // useEffect(() => {
-  //   ValidatorForm.addValidationRule('isColorUnique', value => {
-  //     return colors.every(
-  //       ({ name }) => name.toLowerCase() !== value.toLowerCase()
-  //     );
-  //   });
-  // });
-
+const NewPaletteForm = ({ savePalette, history }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [currentColor, setColor] = useState('teal');
@@ -117,17 +109,34 @@ const NewPaletteForm = () => {
   };
 
   const addNewColor = () => {
-    const newColor = { color: currentColor, name: newName };
+    const newColor = {
+      color: currentColor,
+      name: newName
+    };
     setNewColor(oldColors => [...oldColors, newColor]);
   };
 
   const handleChange = e => setNewName(e.target.value);
+
+  const handleSavePalette = () => {
+    // TODO: Remove ID from here. MongoDB Will create it itself
+    const newName = 'New Test Palette';
+    const newPalette = {
+      colors: colors,
+      name: newName,
+      id: newName.toLowerCase().replace(/ /g, '-')
+    };
+    savePalette(newPalette);
+    // Do this push only when you recieve success message from server
+    history.push('/');
+  };
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
         position="fixed"
+        color="default"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open
         })}
@@ -145,6 +154,13 @@ const NewPaletteForm = () => {
           <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
+          <Button
+            onClick={handleSavePalette}
+            variant="contained"
+            color="primary"
+          >
+            Save Palette
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
