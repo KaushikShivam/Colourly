@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 
 import MiniPalette from './MiniPalette';
@@ -13,6 +14,7 @@ const PaletteList = ({ palettes, classes, history }) => {
         {/* TODO: Refactor and make this a global NAV, Take out the nav styles as well */}
         <nav className={classes.nav}>
           <h1>Colourly</h1>
+          <Link to="/palette/new">Create New</Link>
         </nav>
         <div className={classes.palettes}>
           {palettes.map(palette => (
