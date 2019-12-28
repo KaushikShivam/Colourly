@@ -8,7 +8,6 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { arrayMove } from 'react-sortable-hoc';
 import randomColor from 'randomcolor';
 
@@ -21,23 +20,6 @@ const drawerWidth = 400;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex'
-  },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  menuButton: {
-    marginRight: theme.spacing(2)
   },
   hide: {
     display: 'none'
@@ -102,7 +84,6 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
       paletteName: newPaletteName,
       id: newPaletteName.toLowerCase().replace(/ /g, '-')
     };
-    console.log(newPalette, newPaletteName);
 
     savePalette(newPalette);
     // Do this push only when you recieve success message from server
@@ -133,7 +114,6 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
     <div className={classes.root}>
       <PaletteFormNav
         open={open}
-        classes={classes}
         handleSubmit={handleSavePalette}
         handleDrawerOpen={handleDrawerOpen}
       />
