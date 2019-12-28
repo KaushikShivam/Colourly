@@ -54,10 +54,10 @@ const useStyles = makeStyles(theme => ({
 
 const PaletteFormNav = ({ open, handleSubmit, handleDrawerOpen }) => {
   const classes = useStyles();
-  const [newPaletteName, setNewPaletteName] = useState('');
   const [formShowing, toggleFormShowing] = useState(false);
 
   const showForm = () => toggleFormShowing(true);
+  const hideForm = () => toggleFormShowing(false);
 
   return (
     <div className={classes.root}>
@@ -103,7 +103,9 @@ const PaletteFormNav = ({ open, handleSubmit, handleDrawerOpen }) => {
           </Button>
         </div>
       </AppBar>
-      {formShowing && <PaletteMetaForm handleSubmit={handleSubmit} />}
+      {formShowing && (
+        <PaletteMetaForm handleSubmit={handleSubmit} hideForm={hideForm} />
+      )}
     </div>
   );
 };

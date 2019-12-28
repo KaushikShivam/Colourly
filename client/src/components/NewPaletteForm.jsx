@@ -118,7 +118,7 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
 
   const addRandomColor = () => {
     const newColor = {
-      name: randomColor(),
+      name: randomColor().replace(/#/g, ''),
       color: randomColor()
     };
     setNewColor(oldColors => [...oldColors, newColor]);
