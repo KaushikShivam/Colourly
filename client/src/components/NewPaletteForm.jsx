@@ -3,13 +3,10 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
@@ -17,6 +14,7 @@ import { arrayMove } from 'react-sortable-hoc';
 import randomColor from 'randomcolor';
 
 import DraggableColorList from './DraggableColorList';
+import PaletteFormNav from './PaletteFormNav';
 
 import { ChromePicker } from 'react-color';
 
@@ -81,10 +79,10 @@ const useStyles = makeStyles(theme => ({
 
 const NewPaletteForm = ({ savePalette, history, maxColors }) => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [currentColor, setColor] = useState('teal');
   const [colors, setNewColor] = useState([]);
-  const [newPaletteName, setNewPaletteName] = useState('');
+  // const [newPaletteName, setNewPaletteName] = useState('');
 
   const [newName, setNewName] = useState('');
 
@@ -122,9 +120,9 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
 
   const handleChange = e => setNewName(e.target.value);
 
-  const handleSavePalette = () => {
+  const handleSavePalette = newPaletteName => {
     // TODO: Remove ID from here. MongoDB Will create it itself
-    const newName = newPaletteName;
+    // const newName = newPaletteName;
     const newPalette = {
       colors: colors,
       paletteName: newName,
@@ -158,47 +156,12 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        color="default"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Persistent drawer
-          </Typography>
-          <ValidatorForm onSubmit={handleSavePalette}>
-            <TextValidator
-              value={newPaletteName}
-              label="Palette Name"
-              value={newPaletteName}
-              onChange={e => setNewPaletteName(e.target.value)}
-              validators={['required']}
-              errorMessages={['Enter Palette Name']}
-            />
-            <Button type="submit" variant="contained" color="primary">
-              Save Palette
-            </Button>
-            <Link to="/">
-              <Button variant="contained" color="secondary">
-                Go Back
-              </Button>
-            </Link>
-          </ValidatorForm>
-        </Toolbar>
-      </AppBar>
+      <PaletteFormNav
+        open={open}
+        classes={classes}
+        handleSubmit={handleSavePalette}
+        handleDrawerOpen={handleDrawerOpen}
+      />
       <Drawer
         className={classes.drawer}
         variant="persistent"
