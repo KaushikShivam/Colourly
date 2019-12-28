@@ -13,6 +13,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { arrayMove } from 'react-sortable-hoc';
+import randomColor from 'randomcolor';
 
 import DraggableColorList from './DraggableColorList';
 
@@ -77,7 +78,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NewPaletteForm = ({ savePalette, history }) => {
+const NewPaletteForm = ({ savePalette, history, maxColors }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [currentColor, setColor] = useState('teal');
@@ -142,6 +143,18 @@ const NewPaletteForm = ({ savePalette, history }) => {
     setNewColor(arrayMove(colors, oldIndex, newIndex));
   };
 
+  const clearColors = () => setNewColor([]);
+
+  const addRandomColor = () => {
+    const newColor = {
+      name: randomColor(),
+      color: randomColor()
+    };
+    setNewColor(oldColors => [...oldColors, newColor]);
+  };
+
+  const paletteFull = colors.length >= maxColors;
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -198,10 +211,15 @@ const NewPaletteForm = ({ savePalette, history }) => {
         {/* Color picker */}
         <Typography variant="h4">Design Your Palette</Typography>
         <div>
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" onClick={clearColors}>
             Clear Palette
           </Button>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={addRandomColor}
+            disabled={paletteFull}
+          >
             Random Color
           </Button>
         </div>
@@ -222,10 +240,11 @@ const NewPaletteForm = ({ savePalette, history }) => {
             variant="contained"
             color="primary"
             name="newPaletteName"
-            style={{ backgroundColor: currentColor }}
+            style={{ backgroundColor: paletteFull ? 'grey' : currentColor }}
             type="submit"
+            disabled={paletteFull}
           >
-            Add Color
+            {paletteFull ? 'Palette Full' : 'Add Color'}
           </Button>
         </ValidatorForm>
       </Drawer>
@@ -244,6 +263,10 @@ const NewPaletteForm = ({ savePalette, history }) => {
       </main>
     </div>
   );
+};
+
+NewPaletteForm.defaultProps = {
+  maxColors: 20
 };
 
 export default NewPaletteForm;
