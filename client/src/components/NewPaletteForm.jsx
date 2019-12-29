@@ -93,16 +93,17 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
     setNewColor(oldColors => [...oldColors, newColor]);
   };
 
-  const handleSavePalette = newPaletteName => {
+  const handleSavePalette = newPalette => {
+    // const newPalette = {
+    //   colors: colors,
+    //   paletteName: newPaletteName,
+    //   id: newPaletteName.toLowerCase().replace(/ /g, '-')
+    // };
     // TODO: Remove ID from here. MongoDB Will create it itself
-    const newPalette = {
-      colors: colors,
-      paletteName: newPaletteName,
-      id: newPaletteName.toLowerCase().replace(/ /g, '-')
-    };
-
+    newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, '-');
+    newPalette.colors = colors;
     savePalette(newPalette);
-    // Do this push only when you recieve success message from server
+    // TODO: Do this push only when you recieve success message from server
     history.push('/');
   };
 
