@@ -4,20 +4,7 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { ChromePicker } from 'react-color';
 import { withStyles } from '@material-ui/styles';
 
-const styles = {
-  picker: {
-    marginTop: '2rem'
-  },
-  addColor: {
-    width: '100%',
-    marginTop: '.5rem',
-    fontSize: '1.5rem'
-  },
-  colorNameInput: {
-    width: '100%',
-    height: '70px'
-  }
-};
+import styles from './../styles/ColorPickerForm.styles';
 
 const ColorPickerForm = ({ paletteFull, addNewColor, colors, classes }) => {
   const [currentColor, setColor] = useState('teal');

@@ -14,10 +14,6 @@ const PaletteMetaForm = ({ handleSubmit, hideForm }) => {
   const [stage, setStage] = React.useState('form');
   const [newPaletteName, setNewPaletteName] = useState('');
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
   const showEmojiPicker = () => {
     setStage('emoji');
   };
