@@ -42,7 +42,8 @@ export default {
     textTransform: 'uppercase',
     border: 'none',
     textDecoration: 'none',
-    opacity: '0'
+    opacity: '0',
+    cursor: 'pointer'
   },
   whiteColor: {
     color: 'white'
