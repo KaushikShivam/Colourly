@@ -20,7 +20,7 @@ exports.createPalette = async (req, res, next) => {
 
 exports.getAllPalettes = async (req, res, next) => {
   try {
-    const palettes = await Palette.find();
+    const palettes = await Palette.find().sort('-createdAt');
 
     res.status(200).json({
       status: 'success',
