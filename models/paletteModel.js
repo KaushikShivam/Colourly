@@ -5,13 +5,14 @@ const paletteSchema = mongoose.Schema(
   {
     paletteName: {
       type: String,
-      required: [true, 'A Palette must have a name']
+      required: [true, 'A Palette must have a name'],
+      minLength: [10, 'A tour name must have more or equal that 10 characters']
     },
     emoji: {
       type: String,
       required: [true, 'A Palette must have an emoji']
     },
-    slug: {}
+    slug: String
   },
   {
     timestamps: true
