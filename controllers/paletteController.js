@@ -29,7 +29,7 @@ exports.getAllPalettes = async (req, res, next) => {
       }
     });
   } catch (err) {
-    res.status(400).json({
+    res.status(404).json({
       status: 'fail',
       message: err
     });
@@ -54,7 +54,7 @@ exports.getPalette = async (req, res, next) => {
       }
     });
   } catch (err) {
-    res.status(400).json({
+    res.status(404).json({
       status: 'fail',
       message: err
     });
