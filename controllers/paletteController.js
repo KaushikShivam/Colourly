@@ -1,6 +1,6 @@
 const Palette = require('./../models/paletteModel');
 
-const createPalette = async (req, res, next) => {
+exports.createPalette = async (req, res, next) => {
   try {
     const palette = await Palette.create(req.body);
 
