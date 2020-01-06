@@ -15,4 +15,6 @@ mongoose
     useFindAndModify: false,
     useUnifiedTopology: true
   })
-  .then(() => 'DB Connected');
+  .then(() => {
+    console.log('DB connected');
+  });
