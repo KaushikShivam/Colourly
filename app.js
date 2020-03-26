@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 
 // Get all routes
-// const paletteRouter = require('./routes/paletteRoute');
+const paletteRouter = require('./routes/paletteRoute');
 
 const app = express();
 
@@ -10,5 +10,7 @@ const app = express();
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+app.use('/api/v1/palettes', paletteRouter);
 
 module.exports = app;
