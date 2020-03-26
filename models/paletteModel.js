@@ -3,7 +3,7 @@ const slugify = require('slugify');
 
 const paletteSchema = mongoose.Schema(
   {
-    paletteName: {
+    name: {
       type: String,
       required: [true, 'A Palette must have a name'],
       minLength: [10, 'A tour name must have more or equal that 10 characters']
