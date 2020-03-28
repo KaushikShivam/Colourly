@@ -56,6 +56,7 @@ exports.updatePalette = catchAsync(async (req, res, next) => {
 
 exports.deletePalette = catchAsync(async (req, res, next) => {
   const palette = await Palette.findByIdAndDelete(req.params.id);
+
   if (!palette) return next(new AppError('No Palette found with this ID', 404));
 
   res.status(204).json({
