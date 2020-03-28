@@ -1,18 +1,35 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 
-const paletteSchema = mongoose.Schema(
+const paletteSchema = new mongoose.Schema(
   {
-    name: {
+    paletteName: {
       type: String,
       required: [true, 'A Palette must have a name'],
-      minLength: [10, 'A tour name must have more or equal that 10 characters']
+      trim: true,
+      unique: true,
+      minlength: 10
     },
     emoji: {
       type: String,
       required: [true, 'A Palette must have an emoji']
     },
-    slug: String
+    slug: String,
+    colors: {
+      type: [
+        {
+          name: {
+            type: String,
+            required: [true, 'A Palette must have a color name']
+          },
+          color: {
+            type: String,
+            required: [true, 'A Palette must have a color']
+          }
+        }
+      ],
+      required: [true, 'A Palette must have colors']
+    }
   },
   {
     timestamps: true
@@ -20,9 +37,11 @@ const paletteSchema = mongoose.Schema(
 );
 
 paletteSchema.pre('save', function(next) {
-  this.slug = slugify(this.paletteName, { lower: true });
+  this.slug = slugify(this.paletteName, { replacement: '-', lower: true });
   next();
 });
+
+// TODO: Add User association soon
 
 const Palette = mongoose.model('Palette', paletteSchema);
 
