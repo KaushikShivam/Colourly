@@ -5,6 +5,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const AppError = require('./utils/AppError');
 // Get all routes
 const paletteRouter = require('./routes/paletteRoute');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
@@ -14,6 +15,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use('/api/v1/palettes', paletteRouter);
+app.use('/api/v1/users', userRouter);
 
 // Handle unhandled routes
 app.use('*', (req, res) => {
