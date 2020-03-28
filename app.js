@@ -15,10 +15,10 @@ app.use('/api/v1/palettes', paletteRouter);
 
 // Handle unhandled routes
 app.use('*', (req, res) => {
-  res.status(404).json({
-    status: 'fail',
-    message: `Can't find ${req.originalUrl} on this server`
-  });
+  const err = new Error(`Can't find ${req.originalUrl} on this server!`);
+  err.status = 'fail';
+  err.statusCode = 404;
+  next(err);
 });
 
 app.use((err, req, res, next) => {
