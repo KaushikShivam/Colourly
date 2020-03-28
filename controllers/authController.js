@@ -4,20 +4,45 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/AppError');
 
-exports.signup = catchAsync(async (req, res, next) => {
-  const user = await User.create(req.body);
-
-  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+const signToken = user => {
+  return jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN
   });
+};
 
-  res.status(201).json({
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+
+  // We just attach it to the response object, give it a name, the token/data and provide some options
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    // Always be sent through a secure place and can't be modified by the browser
+    httpOnly: true // to prevent cross site scripting
+  };
+
+  if (process.env.NODE_ENV === 'production') {
+    cookieOptions.secure = true;
+  }
+
+  res.cookie('jwt', token, cookieOptions);
+
+  user.password = undefined; // Removes the password from user
+
+  res.status(statusCode).json({
     status: 'success',
     token,
     data: {
       user
     }
   });
+};
+
+exports.signup = catchAsync(async (req, res, next) => {
+  const user = await User.create(req.body);
+
+  createSendToken(user, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -33,17 +58,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Incorrect email/password', 401)); // 401 -> unauthorized
   }
 
-  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN
-  });
-
-  res.status(200).json({
-    status: 'success',
-    token,
-    data: {
-      user
-    }
-  });
+  createSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
