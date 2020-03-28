@@ -1,112 +1,65 @@
 const Palette = require('./../models/paletteModel');
 
-exports.getAllPalettes = async (req, res, next) => {
-  try {
-    const palettes = await Palette.find();
+const catchAsync = require('./../utils/catchAsync');
+const AppError = require('./../utils/AppError');
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        palettes
-      }
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+exports.getAllPalettes = catchAsync(async (req, res, next) => {
+  const palettes = await Palette.find();
 
-exports.getPalette = async (req, res, next) => {
-  try {
-    const palette = await Palette.findById(req.params.id);
-
-    if (!palette) {
-      return res.status(400).json({
-        status: 'fail',
-        message: err
-      });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      palettes
     }
+  });
+});
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        palette
-      }
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+exports.getPalette = catchAsync(async (req, res, next) => {
+  const palette = await Palette.findById(req.params.id);
 
-exports.createPalette = async (req, res, next) => {
-  try {
-    const palette = await Palette.create(req.body);
+  if (!palette) return next(new AppError('No Palette found with this ID', 404));
 
-    res.status(201).json({
-      status: 'success',
-      data: {
-        palette
-      }
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
-
-exports.updatePalette = async (req, res, next) => {
-  try {
-    const palette = await Palette.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
-
-    if (!palette) {
-      return res.status(400).json({
-        status: 'fail',
-        message: err
-      });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      palette
     }
+  });
+});
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        palette
-      }
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+exports.createPalette = catchAsync(async (req, res, next) => {
+  const palette = await Palette.create(req.body);
 
-exports.deletePalette = async (req, res, next) => {
-  try {
-    const palette = await Palette.findByIdAndDelete(req.params.id);
-    if (!palette) {
-      return res.status(400).json({
-        status: 'fail',
-        message: err
-      });
+  res.status(201).json({
+    status: 'success',
+    data: {
+      palette
     }
+  });
+});
 
-    res.status(204).json({
-      status: 'success',
-      data: null
-    });
-  } catch (err) {
-    return res.status(400).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+exports.updatePalette = catchAsync(async (req, res, next) => {
+  const palette = await Palette.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
+
+  if (!palette) return next(new AppError('No Palette found with this ID', 404));
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      palette
+    }
+  });
+});
+
+exports.deletePalette = catchAsync(async (req, res, next) => {
+  const palette = await Palette.findByIdAndDelete(req.params.id);
+  if (!palette) return next(new AppError('No Palette found with this ID', 404));
+
+  res.status(204).json({
+    status: 'success',
+    data: null
+  });
+});
