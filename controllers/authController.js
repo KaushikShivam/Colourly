@@ -99,6 +99,14 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
+exports.getAuth = (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: req.user
+    }
+  });
+};
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role))
