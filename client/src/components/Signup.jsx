@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/styles';
 
@@ -9,8 +10,9 @@ import CustomButton from './CustomButton';
 import styles from './../styles/Form.styles';
 
 import { setAlert } from './../redux/actions/alert';
+import { registerUser } from './../redux/actions/auth';
 
-const Signup = ({ classes, setAlert }) => {
+const Signup = ({ classes, setAlert, registerUser, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -30,7 +32,13 @@ const Signup = ({ classes, setAlert }) => {
     if (password !== passwordConfirm) {
       setAlert('Passwords do not match', 'error');
     }
+
+    registerUser(formData);
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
@@ -89,8 +97,16 @@ const Signup = ({ classes, setAlert }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  setAlert: (status, message) => dispatch(setAlert(status, message))
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Signup));
+const mapDispatchToProps = dispatch => ({
+  setAlert: (status, message) => dispatch(setAlert(status, message)),
+  registerUser: body => dispatch(registerUser(body))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Signup));
