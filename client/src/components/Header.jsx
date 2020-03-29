@@ -13,6 +13,7 @@ const Header = ({ classes }) => (
     <div className={classes.links}>
       <Link to="/signup">Register</Link>
       <Link to="/login">Login</Link>
+      <Link to="/dashboard">Dashboard</Link>
     </div>
   </nav>
 );
