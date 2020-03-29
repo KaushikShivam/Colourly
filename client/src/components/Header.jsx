@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
-import Slider from 'rc-slider';
+import React from 'react';
 import { withStyles } from '@material-ui/styles';
 
 import { Link } from 'react-router-dom';
 
-import 'rc-slider/assets/index.css';
-import styles from './../styles/Navbar.styles';
+import styles from './../styles/Header.styles';
 
-const Navbar = ({ classes }) => (
-  <nav className={classes.Navbar}>
+const Header = ({ classes }) => (
+  <nav className={classes.Header}>
     <div className={classes.logo}>
       <Link to="/">Colourly</Link>
     </div>
-    <div>
-      <Link to="/signup">Sign Up</Link>
+    <div className={classes.links}>
+      <Link to="/signup">Register</Link>
       <Link to="/login">Login</Link>
     </div>
   </nav>
 );
 
-export default withStyles(styles)(Navbar);
+export default withStyles(styles)(Header);

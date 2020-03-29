@@ -5,28 +5,27 @@ import { withStyles } from '@material-ui/styles';
 import MiniPalette from './MiniPalette';
 import styles from './../styles/PaletteList.styles';
 
+import Header from './Header';
+
 const PaletteList = ({ palettes, classes, history }) => {
   const goToPalette = id => history.push(`/palette/${id}`);
 
   return (
-    <div className={classes.root}>
-      <div className={classes.container}>
-        {/* TODO: Refactor and make this a global NAV, Take out the nav styles as well */}
-        <nav className={classes.nav}>
-          <h1>Colourly</h1>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/palette/new">Create New</Link>
-        </nav>
-        <div className={classes.palettes}>
-          {palettes.map(palette => (
-            <MiniPalette
-              {...palette}
-              handleClick={() => goToPalette(palette.id)}
-            />
-          ))}
+    <>
+      <Header />
+      <div className={classes.root}>
+        <div className={classes.container}>
+          <div className={classes.palettes}>
+            {palettes.map(palette => (
+              <MiniPalette
+                {...palette}
+                handleClick={() => goToPalette(palette.id)}
+              />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
