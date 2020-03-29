@@ -14,6 +14,7 @@ const PaletteList = ({ palettes, classes, history }) => {
         {/* TODO: Refactor and make this a global NAV, Take out the nav styles as well */}
         <nav className={classes.nav}>
           <h1>Colourly</h1>
+          <Link to="/signup">Sign Up</Link>
           <Link to="/palette/new">Create New</Link>
         </nav>
         <div className={classes.palettes}>

@@ -8,6 +8,8 @@ import NewPaletteForm from './components/NewPaletteForm';
 import seedColors from './seedColors';
 import { generatePalette } from './helpers/colorHelpers';
 
+import Signup from './components/Signup';
+
 const App = () => {
   // TODO: Don't need this state for now. This will be fetched from the rc-slider-dot-reverse
   const [palettes, addPalettes] = useState(seedColors);
@@ -56,6 +58,7 @@ const App = () => {
           />
         )}
       />
+      <Route exact path="/signup" render={Signup} />
     </Switch>
   );
 };
