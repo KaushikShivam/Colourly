@@ -9,6 +9,7 @@ import seedColors from './seedColors';
 import { generatePalette } from './helpers/colorHelpers';
 
 import Signup from './components/Signup';
+import Login from './components/Login';
 
 const App = () => {
   // TODO: Don't need this state for now. This will be fetched from the rc-slider-dot-reverse
@@ -59,6 +60,7 @@ const App = () => {
         )}
       />
       <Route exact path="/signup" component={Signup} />
+      <Route exact path="/login" component={Login} />
     </Switch>
   );
 };
