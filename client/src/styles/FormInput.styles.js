@@ -1,7 +1,7 @@
 export default {
   formLabel: {
     display: 'block',
-    fontSize: '1.6rem',
+    fontSize: '1rem',
     fontWeight: 700,
     marginBottom: '0.75rem'
   },
@@ -9,9 +9,9 @@ export default {
   formInput: {
     display: 'block',
     fontFamily: 'inherit',
-    fontSize: '1.5rem',
+    fontSize: '1rem',
     color: 'inherit',
-    padding: '1.25rem 1.75rem',
+    padding: '1rem',
     border: 'none',
     width: '100%',
     backgroundColor: '#fff',
@@ -22,6 +22,7 @@ export default {
     transition: 'all 0.3s',
     borderRadius: 4,
     WebkitBoxSizing: 'border-box',
+    marginBottom: '1.5rem',
     boxSizing: 'border-box',
     '&:focus': {
       outline: 'none',

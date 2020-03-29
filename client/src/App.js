@@ -58,7 +58,7 @@ const App = () => {
           />
         )}
       />
-      <Route exact path="/signup" render={Signup} />
+      <Route exact path="/signup" component={Signup} />
     </Switch>
   );
 };

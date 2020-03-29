@@ -1,17 +1,18 @@
 import React from 'react';
+import { withStyles } from '@material-ui/styles';
 
-import './../styles/Signup.css';
 import Header from './Header';
 import FormInput from './FormInput';
 
-const Signup = () => {
+import styles from './../styles/Form.styles';
+
+const Signup = ({ classes }) => {
   return (
     <>
       <Header />
-
-      <main className="main">
-        <div className="login-form">
-          <h2 className="heading-secondary ma-bt-lg">Create your account</h2>
+      <main className={classes.main}>
+        <div className={classes.authContainer}>
+          <h2 className={classes.formHeading}>Create your account</h2>
           <form className="form">
             <FormInput
               name="name"
@@ -54,4 +55,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default withStyles(styles)(Signup);
