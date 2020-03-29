@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const paletteController = require('./../controllers/paletteController');
+const paletteController = require('../controllers/paletteController');
+const authController = require('../controllers/authController');
 
 router
   .route('/')
-  .get(paletteController.getAllPalettes)
+  .get(authController.protect, paletteController.getAllPalettes)
   .post(paletteController.createPalette);
 
 router

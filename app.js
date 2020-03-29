@@ -9,7 +9,7 @@ const hpp = require('hpp');
 const globalErrorHandler = require('./controllers/errorController');
 const AppError = require('./utils/AppError');
 // Get all routes
-const paletteRouter = require('./routes/paletteRoute');
+const paletteRouter = require('./routes/paletteRoutes');
 const userRouter = require('./routes/userRoutes');
 
 const app = express();
@@ -52,7 +52,7 @@ app.use('/api/v1/palettes', paletteRouter);
 app.use('/api/v1/users', userRouter);
 
 // Handle unhandled routes
-app.use('*', (req, res) => {
+app.use('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 

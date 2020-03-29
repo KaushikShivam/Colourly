@@ -4,32 +4,28 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/AppError');
 
-const signToken = user => {
-  return jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+const signToken = id => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN
   });
 };
 
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
+  // const cookieOptions = {
+  //   expires: new Date(
+  //     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+  //   ),
+  //   httpOnly: true
+  // };
 
-  // We just attach it to the response object, give it a name, the token/data and provide some options
-  const cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
-    // Always be sent through a secure place and can't be modified by the browser
-    httpOnly: true // to prevent cross site scripting
-  };
+  // if (process.env.NODE_ENV === 'production') {
+  //   cookieOptions.secure = true;
+  // }
 
-  if (process.env.NODE_ENV === 'production') {
-    cookieOptions.secure = true;
-  }
-
-  // COnfigure cookie later
   // res.cookie('jwt', token, cookieOptions);
 
-  user.password = undefined; // Removes the password from user
+  user.password = undefined;
 
   res.status(statusCode).json({
     status: 'success',
@@ -64,7 +60,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
-  // 1. Check for token
+  // 1. Get token and check if it exists
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -78,28 +74,30 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  // 2. Verify the token
-  const decoded = await promisify(jwt.verify)(token, jwt.JWT_SECRET);
-
-  // 3. If verification success, check if the user still exists;
+  // 2 Verification token
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  console.log(decoded);
+  // 3. Check if user exists
   const freshUser = await User.findById(decoded.id);
-  if (!freshUser)
-    return next(new AppError('The user with this token doesnt exist', 401));
-
-  // 4. Check if the user changed password after the token was issued
-  if (freshUser.changedPasswordAfter(decoded.iat)) {
+  if (!freshUser) {
     return next(
-      new AppError('Password recently changed. Please login again', 401)
+      new AppError('The user belonging to this user does not exist', 401)
     );
   }
 
-  // If all goes while, call next() and give access
-  // Put the entire user data on the request
+  // 4. Check if user changed the password after the token was issued
+  if (freshUser.changedPasswordAfter(decoded.iat)) {
+    return next(
+      new AppError('You recently changed password. Please login again', 401)
+    );
+  }
+
+  // Grant access
   req.user = freshUser;
   next();
 });
 
-exports.getAuth = (req, res) => {
+exports.getAuth = (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {

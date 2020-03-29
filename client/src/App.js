@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+
 import { Route, Switch } from 'react-router-dom';
 import { SnackbarProvider } from 'react-snackbar-alert';
 
@@ -13,7 +15,18 @@ import { generatePalette } from './helpers/colorHelpers';
 import Signup from './components/Signup';
 import Login from './components/Login';
 
-const App = () => {
+import { loadUser } from './redux/actions/auth';
+import setAuthToken from './utils/setAuthToken';
+
+if (localStorage.jwt) {
+  setAuthToken(localStorage.jwt);
+}
+
+const App = ({ loadUser }) => {
+  useEffect(() => {
+    loadUser();
+  }, [loadUser]);
+
   // TODO: Don't need this state for now. This will be fetched from the rc-slider-dot-reverse
   const [palettes, addPalettes] = useState(seedColors);
 
@@ -70,4 +83,8 @@ const App = () => {
   );
 };
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  loadUser: () => dispatch(loadUser())
+});
+
+export default connect(null, mapDispatchToProps)(App);
