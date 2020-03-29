@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/styles';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Header from './Header';
 import FormInput from './FormInput';
@@ -7,7 +9,9 @@ import CustomButton from './CustomButton';
 
 import styles from './../styles/Form.styles';
 
-const Login = ({ classes }) => {
+import { loginUser } from './../redux/actions/auth';
+
+const Login = ({ classes, loginUser, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -21,7 +25,13 @@ const Login = ({ classes }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    loginUser(formData);
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
@@ -59,4 +69,15 @@ const Login = ({ classes }) => {
   );
 };
 
-export default withStyles(styles)(Login);
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+const mapDispatchToProps = dispatch => ({
+  loginUser: body => dispatch(loginUser(body))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Login));
