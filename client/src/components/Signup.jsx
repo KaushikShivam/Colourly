@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/styles';
 
 import Header from './Header';
 import FormInput from './FormInput';
+import CustomButton from './CustomButton';
 
 import styles from './../styles/Form.styles';
 
@@ -48,6 +49,7 @@ const Signup = ({ classes }) => {
               minLength="8"
               required
             />
+            <CustomButton text="Create" />
           </form>
         </div>
       </main>
