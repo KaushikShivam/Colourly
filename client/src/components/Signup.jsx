@@ -28,7 +28,7 @@ const Signup = ({ classes, setAlert }) => {
     e.preventDefault();
 
     if (password !== passwordConfirm) {
-      setAlert('fail', 'Passwords and password confirmation do not match');
+      setAlert('Passwords do not match', 'error');
     }
   };
 
