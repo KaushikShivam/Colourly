@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/styles';
 
 import Header from './Header';
@@ -7,7 +8,9 @@ import CustomButton from './CustomButton';
 
 import styles from './../styles/Form.styles';
 
-const Signup = ({ classes }) => {
+import { setAlert } from './../redux/actions/alert';
+
+const Signup = ({ classes, setAlert }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,6 +26,10 @@ const Signup = ({ classes }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (password !== passwordConfirm) {
+      setAlert('fail', 'Passwords and password confirmation do not match');
+    }
   };
 
   return (
@@ -82,4 +89,8 @@ const Signup = ({ classes }) => {
   );
 };
 
-export default withStyles(styles)(Signup);
+const mapDispatchToProps = dispatch => ({
+  setAlert: (status, message) => dispatch(setAlert(status, message))
+});
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Signup));
