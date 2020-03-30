@@ -7,7 +7,6 @@ export const fetchPalettes = () => async dispatch => {
   try {
     const res = await axios.get('/api/v1/palettes');
 
-    console.log(res.data);
     dispatch({
       type: FETCH_PALETTES,
       payload: res.data.data.palettes

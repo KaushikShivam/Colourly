@@ -31,7 +31,6 @@ const PaletteMetaForm = ({ handleSubmit, hideForm }) => {
             <TextValidator
               value={newPaletteName}
               label="Palette Name"
-              value={newPaletteName}
               onChange={e => setNewPaletteName(e.target.value)}
               validators={['required']}
               errorMessages={['Enter Palette Name']}

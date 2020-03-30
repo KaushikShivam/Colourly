@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import styles from './../styles/MiniPalette.styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const MiniPalette = ({ classes, paletteName, emoji, colors, handleClick }) => {
-  const [isUser, setIsUser] = useState(true);
-
   const deletePalette = e => {
     e.stopPropagation();
     // TODO: Call the reducer function to delete the palette
@@ -22,9 +20,7 @@ const MiniPalette = ({ classes, paletteName, emoji, colors, handleClick }) => {
   return (
     <div className={classes.root} onClick={handleClick}>
       {/* TODO: Use this button only when the user is authenticated and owns the palette */}
-      {isUser && (
-        <DeleteIcon className={classes.deleteIcon} onClick={deletePalette} />
-      )}
+      <DeleteIcon className={classes.deleteIcon} onClick={deletePalette} />
 
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
