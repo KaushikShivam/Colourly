@@ -21,8 +21,6 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
   const [open, setOpen] = useState(true);
   const [colors, setNewColor] = useState([]);
 
-  const [newName, setNewName] = useState('');
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -35,7 +33,14 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
     setNewColor(oldColors => [...oldColors, newColor]);
   };
 
-  const handleSavePalette = newPalette => {
+  const handleSavePalette = paletteName => {
+    // 1. Create palette
+    // 2. Save to database
+    // 3. Pass cb
+    // 4. once successfull, history.push
+
+    const newPalette = { paletteName, colors };
+
     // const newPalette = {
     //   colors: colors,
     //   paletteName: newPaletteName,
@@ -43,8 +48,8 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
     // };
     // TODO: Remove ID from here. MongoDB Will create it itself
     // newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, '-');
-    newPalette.colors = colors;
-    console.log(newPalette);
+    // newPalette.colors = colors;
+    console.log(paletteName);
     // savePalette(newPalette);
     // TODO: Do this push only when you recieve success message from server
     // history.push('/');

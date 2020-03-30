@@ -10,10 +10,6 @@ const paletteSchema = new mongoose.Schema(
       unique: true,
       minlength: 10
     },
-    emoji: {
-      type: String,
-      required: [true, 'A Palette must have an emoji']
-    },
     slug: String,
     colors: {
       type: [
