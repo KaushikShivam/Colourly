@@ -10,3 +10,7 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const USER_LOADED = 'USER_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT = 'LOGOUT';
+
+export const CREATE_PALETTE = 'CREATE_PALETTE';
+export const CREATE_PALETTE_FAIL = 'CREATE_PALETTE_FAIL';
+export const FETCH_PALETTES = 'FETCH_PALETTES';
