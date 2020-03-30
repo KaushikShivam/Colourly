@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 
 const paletteReducer = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
-  switch (FETCH_PALETTES) {
+  switch (type) {
     case FETCH_PALETTES:
       return { ...state, palettes: payload };
     default:

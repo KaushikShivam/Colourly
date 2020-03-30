@@ -9,7 +9,7 @@ import PaletteList from './components/PaletteList';
 import SingleColorPalette from './components/SingleColorPalette';
 import NewPaletteForm from './components/NewPaletteForm';
 import Alert from './components/Alert';
-import seedColors from './seedColors';
+// import seedColors from './seedColors';
 import { generatePalette } from './helpers/colorHelpers';
 
 import Signup from './components/Signup';
@@ -17,22 +17,25 @@ import Login from './components/Login';
 import PrivateRoute from './routing/PrivateRoute';
 
 import { loadUser } from './redux/actions/auth';
+import { fetchPalettes } from './redux/actions/palette';
+
 import setAuthToken from './utils/setAuthToken';
 
 if (localStorage.jwt) {
   setAuthToken(localStorage.jwt);
 }
 
-const App = ({ loadUser }) => {
+const App = ({ loadUser, fetchPalettes }) => {
   useEffect(() => {
     loadUser();
-  }, [loadUser]);
+    fetchPalettes();
+  }, [loadUser, fetchPalettes]);
 
   // TODO: Don't need this state for now. This will be fetched from the rc-slider-dot-reverse
-  const [palettes, addPalettes] = useState(seedColors);
+  // const [palettes, addPalettes] = useState(seedColors);
 
   //TODO: use MongoDB here
-  const findPalette = id => palettes.find(palette => palette.id === id);
+  // const findPalette = id => palettes.find(palette => palette.id === id);
 
   // TODO: Use this to save it to DB instead. And move this back to newPalette form
   // const savePalette = newPalette => {
@@ -50,7 +53,7 @@ const App = ({ loadUser }) => {
           // TODO: Add component instead of render for PrivateRoute.
           component={routeProps => <NewPaletteForm />}
         />
-        <Route
+        {/* <Route
           exact
           path="/palette/:paletteId/:colorId"
           render={routeProps => (
@@ -61,15 +64,13 @@ const App = ({ loadUser }) => {
               )}
             />
           )}
-        />
+        /> */}
         <Route
           exact
           path="/"
-          render={routeProps => (
-            <PaletteList palettes={palettes} {...routeProps} />
-          )}
+          render={routeProps => <PaletteList {...routeProps} />}
         />
-        <Route
+        {/* <Route
           exact
           path="/palette/:id"
           render={routeProps => (
@@ -78,7 +79,7 @@ const App = ({ loadUser }) => {
               palette={generatePalette(findPalette(routeProps.match.params.id))}
             />
           )}
-        />
+        /> */}
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
       </Switch>
@@ -87,7 +88,8 @@ const App = ({ loadUser }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  loadUser: () => dispatch(loadUser())
+  loadUser: () => dispatch(loadUser()),
+  fetchPalettes: () => dispatch(fetchPalettes())
 });
 
 export default connect(null, mapDispatchToProps)(App);

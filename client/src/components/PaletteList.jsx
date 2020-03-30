@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/styles';
 
 import MiniPalette from './MiniPalette';
@@ -28,4 +29,8 @@ const PaletteList = ({ palettes, classes, history }) => {
   );
 };
 
-export default withStyles(styles)(PaletteList);
+const mapStateToProps = state => ({
+  palettes: state.palette.palettes
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(PaletteList));
