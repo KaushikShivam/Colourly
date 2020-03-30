@@ -29,7 +29,8 @@ const App = ({ loadUser, fetchPalettes }) => {
   useEffect(() => {
     loadUser();
     fetchPalettes();
-  }, [loadUser, fetchPalettes]);
+    console.log('haha');
+  }, [loadUser]);
 
   // TODO: Don't need this state for now. This will be fetched from the rc-slider-dot-reverse
   // const [palettes, addPalettes] = useState(seedColors);
