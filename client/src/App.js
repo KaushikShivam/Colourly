@@ -29,7 +29,6 @@ const App = ({ loadUser, fetchPalettes }) => {
   useEffect(() => {
     loadUser();
     fetchPalettes();
-    console.log('haha');
   }, [loadUser]);
 
   // TODO: Don't need this state for now. This will be fetched from the rc-slider-dot-reverse
@@ -52,7 +51,7 @@ const App = ({ loadUser, fetchPalettes }) => {
           exact
           path="/palette/new"
           // TODO: Add component instead of render for PrivateRoute.
-          component={routeProps => <NewPaletteForm />}
+          component={NewPaletteForm}
         />
         {/* <Route
           exact
@@ -71,16 +70,11 @@ const App = ({ loadUser, fetchPalettes }) => {
           path="/"
           render={routeProps => <PaletteList {...routeProps} />}
         />
-        {/* <Route
+        <Route
           exact
           path="/palette/:id"
-          render={routeProps => (
-            //TODO: Move the generate palette in the palette detail
-            <Palette
-              palette={generatePalette(findPalette(routeProps.match.params.id))}
-            />
-          )}
-        /> */}
+          render={routeProps => <Palette {...routeProps} />}
+        />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
       </Switch>

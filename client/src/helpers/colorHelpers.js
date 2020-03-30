@@ -5,7 +5,6 @@ function generatePalette(starterPalette) {
   let newPalette = {
     paletteName: starterPalette.paletteName,
     id: starterPalette.id,
-    emoji: starterPalette.emoji,
     colors: {}
   };
   for (let level of levels) {

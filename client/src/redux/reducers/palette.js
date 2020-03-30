@@ -1,7 +1,12 @@
-import { FETCH_PALETTES, CREATE_PALETTE } from './../actions/types';
+import {
+  FETCH_PALETTES,
+  CREATE_PALETTE,
+  FETCH_SINGLE_PALETTE
+} from './../actions/types';
 
 const INITIAL_STATE = {
-  palettes: []
+  palettes: [],
+  singlePalette: null
 };
 
 const paletteReducer = (state = INITIAL_STATE, action) => {
@@ -9,6 +14,8 @@ const paletteReducer = (state = INITIAL_STATE, action) => {
   switch (type) {
     case FETCH_PALETTES:
       return { ...state, palettes: payload };
+    case FETCH_SINGLE_PALETTE:
+      return { ...state, singlePalette: payload };
     case CREATE_PALETTE:
     default:
       return state;

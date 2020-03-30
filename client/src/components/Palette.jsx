@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/styles';
+import { connect } from 'react-redux';
 
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
@@ -7,19 +8,32 @@ import PaletteFooter from './PaletteFooter';
 
 import styles from './../styles/Palette.styles';
 
-const Palette = ({ palette: { colors, paletteName, emoji, id }, classes }) => {
+import { fetchSinglePalette, createPalette } from './../redux/actions/palette';
+import { generatePalette } from './../helpers/colorHelpers';
+
+const Palette = ({ match, classes, fetchSinglePalette, singlePalette }) => {
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState('hex');
 
-  const colorBoxes = colors[level].map(color => (
-    <ColorBox
-      background={color[format]}
-      name={color.name}
-      key={color.id}
-      moreUrl={`/palette/${id}/${color.id}`}
-      showLink={true}
-    />
-  ));
+  useEffect(() => {
+    fetchSinglePalette(match.params.id);
+  }, []);
+
+  const createColorBoxes = () => {
+    if (singlePalette) {
+      const palette = generatePalette(singlePalette);
+      const colorBoxes = palette.colors[level].map(color => (
+        <ColorBox
+          background={color[format]}
+          name={color.name}
+          key={color.id}
+          moreUrl={`/palette/${palette.id}/${color.id}`}
+          showLink={true}
+        />
+      ));
+      return colorBoxes;
+    }
+  };
 
   const changeLevel = level => setLevel(level);
 
@@ -33,10 +47,28 @@ const Palette = ({ palette: { colors, paletteName, emoji, id }, classes }) => {
         handleChange={changeFormat}
         showingAllColors
       />
-      <div className={classes.PaletteColors}>{colorBoxes}</div>
-      <PaletteFooter paletteName={paletteName} emoji={emoji} />
+      {singlePalette && (
+        <>
+          <div className={classes.PaletteColors}>{createColorBoxes()}</div>
+          <PaletteFooter
+            paletteName={singlePalette.paletteName}
+            emoji={singlePalette.user.name}
+          />
+        </>
+      )}
     </div>
   );
 };
 
-export default withStyles(styles)(Palette);
+const mapStateToProps = state => ({
+  singlePalette: state.palette.singlePalette
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchSinglePalette: id => dispatch(fetchSinglePalette(id))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Palette));

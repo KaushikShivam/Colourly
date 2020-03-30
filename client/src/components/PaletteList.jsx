@@ -8,7 +8,7 @@ import styles from './../styles/PaletteList.styles';
 import Header from './Header';
 
 const PaletteList = ({ palettes, classes, history }) => {
-  const goToPalette = slug => history.push(`/palette/${slug}`);
+  const goToPalette = id => history.push(`/palette/${id}`);
 
   return (
     <>
@@ -20,7 +20,7 @@ const PaletteList = ({ palettes, classes, history }) => {
               <MiniPalette
                 key={palette.id}
                 {...palette}
-                handleClick={() => goToPalette(palette.slug)}
+                handleClick={() => goToPalette(palette.id)}
               />
             ))}
           </div>

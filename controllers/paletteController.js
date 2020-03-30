@@ -18,7 +18,10 @@ exports.getAllPalettes = catchAsync(async (req, res, next) => {
 });
 
 exports.getPalette = catchAsync(async (req, res, next) => {
-  const palette = await Palette.findById(req.params.id);
+  const palette = await Palette.findById(req.params.id).populate({
+    path: 'user',
+    select: 'name'
+  });
 
   if (!palette) return next(new AppError('No Palette found with this ID', 404));
 
