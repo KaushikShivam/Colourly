@@ -4,7 +4,10 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/AppError');
 
 exports.getAllPalettes = catchAsync(async (req, res, next) => {
-  const palettes = await Palette.find();
+  const palettes = await Palette.find().populate({
+    path: 'user',
+    select: 'name'
+  });
 
   res.status(200).json({
     status: 'success',

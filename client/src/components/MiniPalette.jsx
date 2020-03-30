@@ -3,7 +3,15 @@ import { withStyles } from '@material-ui/styles';
 import styles from './../styles/MiniPalette.styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const MiniPalette = ({ classes, paletteName, emoji, colors, handleClick }) => {
+const MiniPalette = ({
+  classes,
+  id,
+  paletteName,
+  colors,
+  user,
+  slug,
+  handleClick
+}) => {
   const deletePalette = e => {
     e.stopPropagation();
     // TODO: Call the reducer function to delete the palette
@@ -24,7 +32,7 @@ const MiniPalette = ({ classes, paletteName, emoji, colors, handleClick }) => {
 
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
-        {paletteName} <span className={classes.emoji}>{emoji}</span>
+        {paletteName} <span className={classes.emoji}>{user.name}</span>
       </h5>
     </div>
   );

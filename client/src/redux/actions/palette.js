@@ -11,6 +11,7 @@ export const fetchPalettes = () => async dispatch => {
       type: FETCH_PALETTES,
       payload: res.data.data.palettes
     });
+    console.log(res.data.data.palettes);
   } catch (err) {
     dispatch(setAlert(err.response.data.message, 'error'));
   }
