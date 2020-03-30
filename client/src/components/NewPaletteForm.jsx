@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 
 import Typography from '@material-ui/core/Typography';
@@ -20,7 +19,6 @@ import useStyles from './../styles/newPaletteForm.styles';
 const NewPaletteForm = ({ savePalette, history, maxColors }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
-  const [currentColor, setColor] = useState('teal');
   const [colors, setNewColor] = useState([]);
 
   const [newName, setNewName] = useState('');
@@ -44,11 +42,12 @@ const NewPaletteForm = ({ savePalette, history, maxColors }) => {
     //   id: newPaletteName.toLowerCase().replace(/ /g, '-')
     // };
     // TODO: Remove ID from here. MongoDB Will create it itself
-    newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, '-');
+    // newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, '-');
     newPalette.colors = colors;
-    savePalette(newPalette);
+    console.log(newPalette);
+    // savePalette(newPalette);
     // TODO: Do this push only when you recieve success message from server
-    history.push('/');
+    // history.push('/');
   };
 
   const removeColor = colorName => {

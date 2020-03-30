@@ -35,7 +35,10 @@ const App = ({ loadUser }) => {
   const findPalette = id => palettes.find(palette => palette.id === id);
 
   // TODO: Use this to save it to DB instead. And move this back to newPalette form
-  const savePalette = newPalette => addPalettes([...palettes, newPalette]);
+  const savePalette = newPalette => {
+    console.log(newPalette);
+    // addPalettes([...palettes, newPalette])
+  };
 
   return (
     <SnackbarProvider>

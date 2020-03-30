@@ -15,7 +15,6 @@ export default {
     border: 'none',
     width: '100%',
     backgroundColor: '#fff',
-    backgroundColor: '#f2f2f2',
     borderTop: '3px solid transparent',
     borderBottom: '3px solid transparent',
     WebkitTransition: 'all 0.3s',
