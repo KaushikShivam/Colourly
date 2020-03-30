@@ -28,6 +28,9 @@ exports.getPalette = catchAsync(async (req, res, next) => {
 });
 
 exports.createPalette = catchAsync(async (req, res, next) => {
+  // add user id to the palette
+  req.body.user = req.user.id;
+
   const palette = await Palette.create(req.body);
 
   res.status(201).json({

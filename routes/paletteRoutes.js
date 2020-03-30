@@ -6,8 +6,8 @@ const authController = require('../controllers/authController');
 
 router
   .route('/')
-  .get(authController.protect, paletteController.getAllPalettes)
-  .post(paletteController.createPalette);
+  .get(paletteController.getAllPalettes)
+  .post(authController.protect, paletteController.createPalette);
 
 router
   .route('/:id')
