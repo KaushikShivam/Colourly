@@ -9,8 +9,6 @@ import PaletteList from './components/PaletteList';
 import SingleColorPalette from './components/SingleColorPalette';
 import NewPaletteForm from './components/NewPaletteForm';
 import Alert from './components/Alert';
-// import seedColors from './seedColors';
-import { generatePalette } from './helpers/colorHelpers';
 
 import Signup from './components/Signup';
 import Login from './components/Login';
@@ -53,18 +51,16 @@ const App = ({ loadUser, fetchPalettes }) => {
           // TODO: Add component instead of render for PrivateRoute.
           component={NewPaletteForm}
         />
-        {/* <Route
+        <Route
           exact
           path="/palette/:paletteId/:colorId"
           render={routeProps => (
             <SingleColorPalette
               colorId={routeProps.match.params.colorId}
-              palette={generatePalette(
-                findPalette(routeProps.match.params.paletteId)
-              )}
+              paletteId={routeProps.match.params.paletteId}
             />
           )}
-        /> */}
+        />
         <Route
           exact
           path="/"

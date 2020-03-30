@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { FETCH_PALETTES, CREATE_PALETTE, FETCH_SINGLE_PALETTE } from './types';
+import {
+  FETCH_PALETTES,
+  CREATE_PALETTE,
+  FETCH_SINGLE_PALETTE,
+  CLEAR_SINGLE_PALETTE
+} from './types';
 
 import { setAlert } from './alert';
 
@@ -17,6 +22,9 @@ export const fetchPalettes = () => async dispatch => {
 };
 
 export const fetchSinglePalette = id => async dispatch => {
+  dispatch({
+    type: CLEAR_SINGLE_PALETTE
+  });
   try {
     const res = await axios.get(`/api/v1/palettes/${id}`);
 

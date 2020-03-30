@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
+import { connect } from 'react-redux';
 
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import PaletteFooter from './PaletteFooter';
+
 import styles from './../styles/Palette.styles';
 
-const SingleColorPalette = ({ palette, colorId, classes }) => {
+import { fetchSinglePalette } from './../redux/actions/palette';
+import { generatePalette } from './../helpers/colorHelpers';
+
+const SingleColorPalette = ({
+  paletteId,
+  singlePalette,
+  fetchSinglePalette,
+  colorId,
+  classes
+}) => {
   const [format, setFormat] = useState('hex');
+
+  useEffect(() => {
+    fetchSinglePalette(paletteId);
+  }, []);
 
   const gatherShades = (palette, colorToFilterBy) => {
     let shades = [];
@@ -24,29 +39,51 @@ const SingleColorPalette = ({ palette, colorId, classes }) => {
 
   const changeFormat = val => setFormat(val);
 
-  const shades = gatherShades(palette, colorId);
+  const createColorBoxes = () => {
+    if (singlePalette) {
+      const palette = generatePalette(singlePalette);
+      const shades = gatherShades(palette, colorId);
 
-  const colorBoxes = shades.map(color => (
-    <ColorBox
-      key={color.name}
-      name={color.name}
-      background={color[format]}
-      showLink={false}
-    />
-  ));
-
+      return shades.map(color => (
+        <ColorBox
+          key={color.name}
+          name={color.name}
+          background={color[format]}
+          showLink={false}
+        />
+      ));
+    }
+  };
   return (
     <div className={classes.Palette}>
       <Navbar handleChange={changeFormat} showingAllColors={false} />
-      <div className={classes.PaletteColors}>
-        {colorBoxes}
-        <div className={classes.goBack}>
-          <Link to={`/palette/${palette.id}`}>Go Back</Link>
-        </div>
-      </div>
-      <PaletteFooter paletteName={palette.paletteName} emoji={palette.emoji} />
+      {singlePalette && (
+        <>
+          <div className={classes.PaletteColors}>
+            {createColorBoxes()}
+            <div className={classes.goBack}>
+              <Link to={`/palette/${singlePalette.id}`}>Go Back</Link>
+            </div>
+          </div>
+          <PaletteFooter
+            paletteName={singlePalette.paletteName}
+            emoji={singlePalette.user.name}
+          />
+        </>
+      )}
     </div>
   );
 };
 
-export default withStyles(styles)(SingleColorPalette);
+const mapStateToProps = state => ({
+  singlePalette: state.palette.singlePalette
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchSinglePalette: id => dispatch(fetchSinglePalette(id))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(SingleColorPalette));

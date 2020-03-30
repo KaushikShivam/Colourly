@@ -8,7 +8,7 @@ import PaletteFooter from './PaletteFooter';
 
 import styles from './../styles/Palette.styles';
 
-import { fetchSinglePalette, createPalette } from './../redux/actions/palette';
+import { fetchSinglePalette } from './../redux/actions/palette';
 import { generatePalette } from './../helpers/colorHelpers';
 
 const Palette = ({ match, classes, fetchSinglePalette, singlePalette }) => {
