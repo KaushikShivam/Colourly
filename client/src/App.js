@@ -14,6 +14,7 @@ import { generatePalette } from './helpers/colorHelpers';
 
 import Signup from './components/Signup';
 import Login from './components/Login';
+import PrivateRoute from './routing/PrivateRoute';
 
 import { loadUser } from './redux/actions/auth';
 import setAuthToken from './utils/setAuthToken';
@@ -40,12 +41,11 @@ const App = ({ loadUser }) => {
     <SnackbarProvider>
       <Alert />
       <Switch>
-        <Route
+        <PrivateRoute
           exact
           path="/palette/new"
-          render={routeProps => (
-            <NewPaletteForm savePalette={savePalette} {...routeProps} />
-          )}
+          // TODO: Add component instead of render for PrivateRoute.
+          component={routeProps => <NewPaletteForm savePalette={savePalette} />}
         />
         <Route
           exact
