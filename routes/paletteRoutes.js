@@ -12,7 +12,7 @@ router
 router
   .route('/:id')
   .get(paletteController.getPalette)
-  .patch(paletteController.updatePalette)
-  .delete(paletteController.deletePalette);
+  .patch(authController.protect, paletteController.updatePalette)
+  .delete(authController.protect, paletteController.deletePalette);
 
 module.exports = router;

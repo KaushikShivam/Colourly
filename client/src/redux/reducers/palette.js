@@ -4,7 +4,8 @@ import {
   FETCH_MY_PALETTES,
   CREATE_PALETTE,
   FETCH_SINGLE_PALETTE,
-  CLEAR_SINGLE_PALETTE
+  CLEAR_SINGLE_PALETTE,
+  DELETE_PALETTE
 } from './../actions/types';
 
 const INITIAL_STATE = {
@@ -24,6 +25,11 @@ const paletteReducer = (state = INITIAL_STATE, action) => {
       return { ...state, singlePalette: payload };
     case CLEAR_SINGLE_PALETTE:
       return { ...state, singlePalette: null };
+    case DELETE_PALETTE:
+      return {
+        ...state,
+        palettes: state.palettes.filter(palette => palette.id !== payload)
+      };
     case CREATE_PALETTE:
     default:
       return state;

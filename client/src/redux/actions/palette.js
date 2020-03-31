@@ -5,7 +5,8 @@ import {
   FETCH_SINGLE_PALETTE,
   CLEAR_SINGLE_PALETTE,
   FETCH_USER_PALETTES,
-  FETCH_MY_PALETTES
+  FETCH_MY_PALETTES,
+  DELETE_PALETTE
 } from './types';
 
 import { setAlert } from './alert';
@@ -63,8 +64,7 @@ export const fetchUserPalettes = id => async dispatch => {
       payload: res.data.data.user.palettes
     });
   } catch (err) {
-    console.log('ERROR', err);
-    dispatch(setAlert(err, 'error'));
+    dispatch(setAlert(err.response.data.message, 'error'));
   }
 };
 
@@ -76,7 +76,19 @@ export const fetchMyPalettes = () => async dispatch => {
       payload: res.data.data.user.palettes
     });
   } catch (err) {
-    console.log('ERROR', err);
-    dispatch(setAlert(err, 'error'));
+    dispatch(setAlert(err.response.data.message, 'error'));
+  }
+};
+
+export const deletePalette = id => async dispatch => {
+  try {
+    await axios.delete(`/api/v1/palettes/${id}`);
+
+    dispatch({
+      type: DELETE_PALETTE,
+      payload: id
+    });
+  } catch (err) {
+    dispatch(setAlert(err.response.data.message, 'error'));
   }
 };

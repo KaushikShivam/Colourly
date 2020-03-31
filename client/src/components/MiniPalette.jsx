@@ -4,18 +4,22 @@ import { withStyles } from '@material-ui/styles';
 import styles from './../styles/MiniPalette.styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+import { deletePalette } from './../redux/actions/palette';
+
 const MiniPalette = ({
   classes,
+  id,
   paletteName,
   user,
   colors,
   handleClick,
   handleUserClick,
-  auth
+  auth,
+  deletePalette
 }) => {
-  const deletePalette = e => {
+  const handleDelete = e => {
     e.stopPropagation();
-    // TODO: Call the reducer function to delete the palette
+    deletePalette(id);
   };
 
   const handleUser = e => {
@@ -23,7 +27,6 @@ const MiniPalette = ({
     handleUserClick(user.id);
   };
 
-  // TODO: Add Creator link as well
   const miniColorBoxes = colors.map(color => (
     <div
       className={classes.miniColor}
@@ -37,7 +40,7 @@ const MiniPalette = ({
   return (
     <div className={classes.root} onClick={handleClick}>
       {isPaletteOwner() && (
-        <DeleteIcon className={classes.deleteIcon} onClick={deletePalette} />
+        <DeleteIcon className={classes.deleteIcon} onClick={handleDelete} />
       )}
 
       <div className={classes.colors}>{miniColorBoxes}</div>
@@ -52,4 +55,11 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(MiniPalette));
+const mapDispatchToProps = dispatch => ({
+  deletePalette: id => dispatch(deletePalette(id))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(MiniPalette));
