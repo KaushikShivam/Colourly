@@ -5,7 +5,13 @@ import chroma from 'chroma-js';
 import { withStyles } from '@material-ui/styles';
 import styles from './../styles/ColorBox.styles';
 
-const ColorBox = ({ background, name, moreUrl, showLink, classes }) => {
+const ColorBox = ({
+  background,
+  name,
+  moreUrl,
+  showingFullPalette,
+  classes
+}) => {
   const [copied, setCopied] = useState(false);
 
   const contrast =
@@ -38,7 +44,7 @@ const ColorBox = ({ background, name, moreUrl, showLink, classes }) => {
           </div>
           <button className={`${classes.copyButton} ${contrast}`}>Copy</button>
         </div>
-        {showLink && (
+        {showingFullPalette && (
           <Link to={moreUrl} onClick={e => e.stopPropagation()}>
             <span className={`${classes.seeMore} ${contrast}`}>MORE</span>
           </Link>
