@@ -3,10 +3,22 @@ import { withStyles } from '@material-ui/styles';
 import styles from './../styles/MiniPalette.styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const MiniPalette = ({ classes, paletteName, user, colors, handleClick }) => {
+const MiniPalette = ({
+  classes,
+  paletteName,
+  user,
+  colors,
+  handleClick,
+  handleUserClick
+}) => {
   const deletePalette = e => {
     e.stopPropagation();
     // TODO: Call the reducer function to delete the palette
+  };
+
+  const handleUser = e => {
+    e.stopPropagation();
+    handleUserClick(user.id);
   };
 
   // TODO: Add Creator link as well
@@ -25,7 +37,7 @@ const MiniPalette = ({ classes, paletteName, user, colors, handleClick }) => {
 
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
-        {paletteName} <span className={classes.emoji}>{user.name}</span>
+        {paletteName} <span onClick={handleUser}>{user.name}</span>
       </h5>
     </div>
   );

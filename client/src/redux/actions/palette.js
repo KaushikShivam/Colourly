@@ -4,6 +4,7 @@ import {
   CREATE_PALETTE,
   FETCH_SINGLE_PALETTE,
   CLEAR_SINGLE_PALETTE,
+  FETCH_USER_PALETTES,
   FETCH_MY_PALETTES
 } from './types';
 
@@ -54,6 +55,19 @@ export const createPalette = palette => async dispatch => {
 };
 
 // Fetch user palettes
+export const fetchUserPalettes = id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/v1/users/${id}`);
+    dispatch({
+      type: FETCH_USER_PALETTES,
+      payload: res.data.data.user.palettes
+    });
+  } catch (err) {
+    console.log('ERROR', err);
+    dispatch(setAlert(err, 'error'));
+  }
+};
+
 export const fetchMyPalettes = () => async dispatch => {
   try {
     const res = await axios.get('/api/v1/users/me');
@@ -61,7 +75,6 @@ export const fetchMyPalettes = () => async dispatch => {
       type: FETCH_MY_PALETTES,
       payload: res.data.data.user.palettes
     });
-    console.log(res.data.data.user.palettes);
   } catch (err) {
     console.log('ERROR', err);
     dispatch(setAlert(err, 'error'));

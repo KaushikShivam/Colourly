@@ -1,5 +1,6 @@
 import {
   FETCH_PALETTES,
+  FETCH_USER_PALETTES,
   FETCH_MY_PALETTES,
   CREATE_PALETTE,
   FETCH_SINGLE_PALETTE,
@@ -17,6 +18,7 @@ const paletteReducer = (state = INITIAL_STATE, action) => {
     case FETCH_PALETTES:
       return { ...state, palettes: payload };
     case FETCH_MY_PALETTES:
+    case FETCH_USER_PALETTES:
       return { ...state, palettes: payload };
     case FETCH_SINGLE_PALETTE:
       return { ...state, singlePalette: payload };

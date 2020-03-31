@@ -5,27 +5,42 @@ import { withStyles } from '@material-ui/styles';
 
 import MiniPalette from './MiniPalette';
 import styles from './../styles/PaletteList.styles';
-import { fetchPalettes, fetchMyPalettes } from './../redux/actions/palette';
+import {
+  fetchPalettes,
+  fetchMyPalettes,
+  fetchUserPalettes
+} from './../redux/actions/palette';
 
 import Header from './Header';
 
 const PaletteList = ({
   fetchPalettes,
   fetchMyPalettes,
+  fetchUserPalettes,
   palettes,
   classes,
   history,
+  match,
   location: { pathname }
 }) => {
   const goToPalette = id => history.push(`/palette/${id}`);
+  const goToUser = id => history.push(`/user/${id}`);
 
   useEffect(() => {
     if (pathname === '/me') {
       fetchMyPalettes();
+    } else if (pathname.includes('/user')) {
+      fetchUserPalettes(match.params.userId);
     } else {
       fetchPalettes();
     }
-  }, []);
+  }, [
+    fetchMyPalettes,
+    fetchPalettes,
+    fetchUserPalettes,
+    match.params.userId,
+    pathname
+  ]);
 
   return (
     <>
@@ -38,6 +53,7 @@ const PaletteList = ({
                 key={palette.id}
                 {...palette}
                 handleClick={() => goToPalette(palette.id)}
+                handleUserClick={goToUser}
               />
             ))}
           </div>
@@ -53,6 +69,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchPalettes: () => dispatch(fetchPalettes()),
+  fetchUserPalettes: id => dispatch(fetchUserPalettes(id)),
   fetchMyPalettes: () => dispatch(fetchMyPalettes())
 });
 

@@ -27,7 +27,7 @@ const limiter = rateLimit({
 });
 
 // Only limiting our api
-app.use('/api', limiter);
+// app.use('/api', limiter);
 
 // Set secure http headers on api
 app.use(helmet());

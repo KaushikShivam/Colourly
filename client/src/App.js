@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { Route, Switch } from 'react-router-dom';
@@ -66,6 +66,7 @@ const App = ({ loadUser }) => {
           )}
         />
         <Route exact path="/" component={PaletteList} />
+        <Route exact path="/user/:userId" component={PaletteList} />
         <Route
           exact
           path="/palette/:id"
