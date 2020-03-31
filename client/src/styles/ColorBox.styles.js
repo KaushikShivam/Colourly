@@ -9,6 +9,12 @@ export default {
     marginBottom: '-3.5px',
     '&:hover button': {
       opacity: '1'
+    },
+    '@media (max-width: 900px)': {
+      width: '50%'
+    },
+    '@media (max-width: 500px)': {
+      width: '100%'
     }
   },
   seeMore: {
