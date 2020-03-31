@@ -5,22 +5,26 @@ import { withStyles } from '@material-ui/styles';
 
 import MiniPalette from './MiniPalette';
 import styles from './../styles/PaletteList.styles';
-import { fetchPalettes } from './../redux/actions/palette';
+import { fetchPalettes, fetchMyPalettes } from './../redux/actions/palette';
 
 import Header from './Header';
 
 const PaletteList = ({
   fetchPalettes,
+  fetchMyPalettes,
   palettes,
   classes,
   history,
-  location: { pathName }
+  location: { pathname }
 }) => {
   const goToPalette = id => history.push(`/palette/${id}`);
 
   useEffect(() => {
-    console.log(location);
-    fetchPalettes();
+    if (pathname === '/me') {
+      fetchMyPalettes();
+    } else {
+      fetchPalettes();
+    }
   }, []);
 
   return (
@@ -48,7 +52,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPalettes: () => dispatch(fetchPalettes())
+  fetchPalettes: () => dispatch(fetchPalettes()),
+  fetchMyPalettes: () => dispatch(fetchMyPalettes())
 });
 
 export default connect(

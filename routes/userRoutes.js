@@ -10,7 +10,8 @@ router.post('/login', authController.login);
 router.use(authController.protect);
 
 router.get('/auth', authController.getAuth);
-router.route('/:id').get(userController.getUser);
 router.get('/me', userController.getMe, userController.getUser);
+
+router.route('/:id').get(userController.getUser);
 
 module.exports = router;

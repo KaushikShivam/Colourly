@@ -14,7 +14,7 @@ export default {
     padding: '1rem',
     border: 'none',
     width: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: '#eceff1',
     borderTop: '3px solid transparent',
     borderBottom: '3px solid transparent',
     WebkitTransition: 'all 0.3s',

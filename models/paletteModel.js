@@ -44,6 +44,14 @@ paletteSchema.pre('save', function(next) {
   next();
 });
 
+paletteSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'user',
+    select: 'name'
+  });
+  next();
+});
+
 // TODO: Add User association soon
 
 const Palette = mongoose.model('Palette', paletteSchema);
