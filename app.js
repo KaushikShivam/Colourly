@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const path = require('path');
 
 const globalErrorHandler = require('./controllers/errorController');
 const AppError = require('./utils/AppError');
@@ -50,6 +51,15 @@ app.use(hpp());
 
 app.use('/api/v1/palettes', paletteRouter);
 app.use('/api/v1/users', userRouter);
+
+// Add front end static handler
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 // Handle unhandled routes
 app.use('*', (req, res, next) => {
