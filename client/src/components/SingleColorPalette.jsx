@@ -23,7 +23,7 @@ const SingleColorPalette = ({
 
   useEffect(() => {
     fetchSinglePalette(paletteId);
-  }, []);
+  }, [fetchSinglePalette, paletteId]);
 
   const gatherShades = (palette, colorToFilterBy) => {
     let shades = [];

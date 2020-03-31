@@ -17,7 +17,7 @@ const Palette = ({ match, classes, fetchSinglePalette, singlePalette }) => {
 
   useEffect(() => {
     fetchSinglePalette(match.params.id);
-  }, []);
+  }, [fetchSinglePalette, match.params.id]);
 
   const createColorBoxes = () => {
     if (singlePalette) {
