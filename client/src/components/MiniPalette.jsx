@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/styles';
 import styles from './../styles/MiniPalette.styles';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -9,7 +10,8 @@ const MiniPalette = ({
   user,
   colors,
   handleClick,
-  handleUserClick
+  handleUserClick,
+  auth
 }) => {
   const deletePalette = e => {
     e.stopPropagation();
@@ -30,10 +32,13 @@ const MiniPalette = ({
     />
   ));
 
+  const isPaletteOwner = () => auth.isAuthenticated && user.id === auth.user.id;
+
   return (
     <div className={classes.root} onClick={handleClick}>
-      {/* TODO: Use this button only when the user is authenticated and owns the palette */}
-      <DeleteIcon className={classes.deleteIcon} onClick={deletePalette} />
+      {isPaletteOwner() && (
+        <DeleteIcon className={classes.deleteIcon} onClick={deletePalette} />
+      )}
 
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
@@ -43,4 +48,8 @@ const MiniPalette = ({
   );
 };
 
-export default withStyles(styles)(MiniPalette);
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(MiniPalette));
