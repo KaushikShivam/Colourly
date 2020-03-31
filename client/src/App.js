@@ -15,7 +15,6 @@ import Login from './components/Login';
 import PrivateRoute from './routing/PrivateRoute';
 
 import { loadUser } from './redux/actions/auth';
-import { fetchPalettes } from './redux/actions/palette';
 
 import setAuthToken from './utils/setAuthToken';
 
@@ -23,10 +22,9 @@ if (localStorage.jwt) {
   setAuthToken(localStorage.jwt);
 }
 
-const App = ({ loadUser, fetchPalettes }) => {
+const App = ({ loadUser }) => {
   useEffect(() => {
     loadUser();
-    fetchPalettes();
   }, [loadUser]);
 
   // TODO: Don't need this state for now. This will be fetched from the rc-slider-dot-reverse
@@ -51,6 +49,12 @@ const App = ({ loadUser, fetchPalettes }) => {
           // TODO: Add component instead of render for PrivateRoute.
           component={NewPaletteForm}
         />
+        <PrivateRoute
+          exact
+          path="/me"
+          // TODO: Add component instead of render for PrivateRoute.
+          component={PaletteList}
+        />
         <Route
           exact
           path="/palette/:paletteId/:colorId"
@@ -61,11 +65,7 @@ const App = ({ loadUser, fetchPalettes }) => {
             />
           )}
         />
-        <Route
-          exact
-          path="/"
-          render={routeProps => <PaletteList {...routeProps} />}
-        />
+        <Route exact path="/" component={PaletteList} />
         <Route
           exact
           path="/palette/:id"
@@ -79,8 +79,7 @@ const App = ({ loadUser, fetchPalettes }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  loadUser: () => dispatch(loadUser()),
-  fetchPalettes: () => dispatch(fetchPalettes())
+  loadUser: () => dispatch(loadUser())
 });
 
 export default connect(null, mapDispatchToProps)(App);

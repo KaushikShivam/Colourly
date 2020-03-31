@@ -19,6 +19,7 @@ const Header = ({ classes, auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <>
       <Link to="/palette/new">Create Palette</Link>
+      <Link to="/me">My Palettes</Link>
       <a onClick={logout} href="#!">
         Logout
       </a>

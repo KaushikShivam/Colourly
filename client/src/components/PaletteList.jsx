@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 
 import MiniPalette from './MiniPalette';
 import styles from './../styles/PaletteList.styles';
+import { fetchPalettes } from './../redux/actions/palette';
 
 import Header from './Header';
 
-const PaletteList = ({ palettes, classes, history }) => {
+const PaletteList = ({
+  fetchPalettes,
+  palettes,
+  classes,
+  history,
+  location: { pathName }
+}) => {
   const goToPalette = id => history.push(`/palette/${id}`);
+
+  useEffect(() => {
+    console.log(location);
+    fetchPalettes();
+  }, []);
 
   return (
     <>
@@ -34,4 +47,11 @@ const mapStateToProps = state => ({
   palettes: state.palette.palettes
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(PaletteList));
+const mapDispatchToProps = dispatch => ({
+  fetchPalettes: () => dispatch(fetchPalettes())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(withStyles(styles)(PaletteList)));

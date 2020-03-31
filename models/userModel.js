@@ -40,7 +40,9 @@ const userSchema = new mongoose.Schema(
     passwordChangedAt: String
   },
   {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
 );
 
@@ -76,6 +78,13 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
   // False means not changed
   return false;
 };
+
+// Virtual populate
+userSchema.virtual('palettes', {
+  ref: 'Palette',
+  foreignField: 'user',
+  localField: '_id'
+});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
