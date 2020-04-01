@@ -2,7 +2,6 @@ import sizes from './sizes';
 
 export default {
   root: {
-    maxWidth: '1440px',
     width: '100%'
   },
   header: {
