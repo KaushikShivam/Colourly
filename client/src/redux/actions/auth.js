@@ -54,11 +54,11 @@ export const registerUser = body => async dispatch => {
 export const loginUser = body => async dispatch => {
   try {
     const res = await axios.post('/api/v1/users/login', body);
-
+    console.log(res);
     dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
     dispatch(loadUser());
   } catch (err) {
-    console.log('hahahaha', err.response);
+    console.log('hahahaha', err);
     dispatch(setAlert(err.response.data.message, 'error'));
     dispatch({
       type: LOGIN_FAIL

@@ -35,7 +35,8 @@ const MiniPalette = ({
     />
   ));
 
-  const isPaletteOwner = () => auth.isAuthenticated && user.id === auth.user.id;
+  const isPaletteOwner = () =>
+    auth.isAuthenticated && auth.user && user.id === auth.user.id;
 
   return (
     <div className={classes.root} onClick={handleClick}>
