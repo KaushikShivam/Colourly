@@ -109,7 +109,10 @@ export default {
       textAlign: 'center',
       marginBottom: 0,
       padding: '1rem',
-      textTransform: 'uppercase'
+      textTransform: 'uppercase',
+      [sizes.down('xs')]: {
+        fontSize: '4rem'
+      }
     },
     '& p': {
       fontSize: '2rem',
