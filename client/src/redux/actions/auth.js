@@ -58,6 +58,7 @@ export const loginUser = body => async dispatch => {
     dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
     dispatch(loadUser());
   } catch (err) {
+    console.log('hahahaha', err.response);
     dispatch(setAlert(err.response.data.message, 'error'));
     dispatch({
       type: LOGIN_FAIL
