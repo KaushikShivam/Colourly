@@ -16,7 +16,7 @@ export default {
     /*Add later when we use this for the button in form*/
     border: 'none',
     cursor: 'pointer',
-    backgroundColor: '#69bfb7',
+    backgroundColor: '#104573',
     color: '#fff',
     '&:hover': {
       WebkitTransform: 'translateY(-3px)',

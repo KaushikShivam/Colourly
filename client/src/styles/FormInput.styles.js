@@ -1,5 +1,6 @@
 export default {
   formLabel: {
+    color: '#104573',
     display: 'block',
     fontSize: '1rem',
     fontWeight: 700,
@@ -28,7 +29,7 @@ export default {
       borderBottom: '3px solid#69BFB7'
     },
     '&:focus:invalid': {
-      borderBottom: '3px solid #ff7730'
+      borderBottom: '3px solid #D92929'
     },
     '&::-webkit-input-placeholder': {
       color: '#bbb'

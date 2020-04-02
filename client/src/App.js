@@ -27,18 +27,6 @@ const App = ({ loadUser }) => {
     loadUser();
   }, [loadUser]);
 
-  // TODO: Don't need this state for now. This will be fetched from the rc-slider-dot-reverse
-  // const [palettes, addPalettes] = useState(seedColors);
-
-  //TODO: use MongoDB here
-  // const findPalette = id => palettes.find(palette => palette.id === id);
-
-  // TODO: Use this to save it to DB instead. And move this back to newPalette form
-  // const savePalette = newPalette => {
-  //   console.log(newPalette);
-  //   // addPalettes([...palettes, newPalette])
-  // };
-
   return (
     <SnackbarProvider>
       <Alert />
@@ -46,15 +34,10 @@ const App = ({ loadUser }) => {
         <PrivateRoute
           exact
           path="/palette/new"
-          // TODO: Add component instead of render for PrivateRoute.
+          // MARK: Add component instead of render for PrivateRoute.
           component={NewPaletteForm}
         />
-        <PrivateRoute
-          exact
-          path="/me"
-          // TODO: Add component instead of render for PrivateRoute.
-          component={PaletteList}
-        />
+        <PrivateRoute exact path="/me" component={PaletteList} />
         <Route
           exact
           path="/palette/:paletteId/:colorId"

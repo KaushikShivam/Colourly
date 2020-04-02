@@ -10,7 +10,7 @@ export default {
     }
   },
   colors: {
-    backgroundColor: '#dae1e4',
+    backgroundColor: '##D7D8D9',
     height: '100px',
     overflow: 'hidden',
     borderRadius: '5px'

@@ -8,6 +8,8 @@ import styles from './../styles/Header.styles';
 
 import { logout } from './../redux/actions/auth';
 
+import logo from './../assets/logo.png';
+
 const Header = ({ classes, auth: { isAuthenticated, loading }, logout }) => {
   const guestLinks = (
     <>
@@ -29,7 +31,10 @@ const Header = ({ classes, auth: { isAuthenticated, loading }, logout }) => {
   return (
     <nav className={classes.Header}>
       <div className={classes.logo}>
-        <Link to="/">Colourly</Link>
+        <Link to="/">
+          {/* <img src={logo} alt="Company logo" /> */}
+          Colourly
+        </Link>
       </div>
       <div className={classes.links}>
         {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}

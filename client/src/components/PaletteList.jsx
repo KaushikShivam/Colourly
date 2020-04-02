@@ -43,23 +43,21 @@ const PaletteList = ({
   ]);
 
   return (
-    <>
+    <div className={classes.root}>
       <Header />
-      <div className={classes.root}>
-        <div className={classes.container}>
-          <div className={classes.palettes}>
-            {palettes.map(palette => (
-              <MiniPalette
-                key={palette.id}
-                {...palette}
-                handleClick={() => goToPalette(palette.id)}
-                handleUserClick={goToUser}
-              />
-            ))}
-          </div>
+      <div className={classes.container}>
+        <div className={classes.palettes}>
+          {palettes.map(palette => (
+            <MiniPalette
+              key={palette.id}
+              {...palette}
+              handleClick={() => goToPalette(palette.id)}
+              handleUserClick={goToUser}
+            />
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

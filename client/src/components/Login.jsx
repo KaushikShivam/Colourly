@@ -61,7 +61,7 @@ const Login = ({ classes, loginUser, isAuthenticated }) => {
               onChange={handleChange}
               required
             />
-            <CustomButton text="Create" />
+            <CustomButton text="Login" />
           </form>
         </div>
       </main>
