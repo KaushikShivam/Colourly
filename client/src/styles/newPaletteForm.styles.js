@@ -24,12 +24,13 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     width: '100%',
     padding: '0 8px',
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    minHeight: '6vh',
+    height: '6vh'
   },
   content: {
     flexGrow: 1,
-    height: 'calc(100vh - 64px)',
+    height: '94vh',
     padding: 0,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
