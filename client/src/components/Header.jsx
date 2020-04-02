@@ -10,7 +10,11 @@ import { logout } from './../redux/actions/auth';
 
 import logo from './../assets/logo.png';
 
-const Header = ({ classes, auth: { isAuthenticated, loading }, logout }) => {
+const Header = ({
+  classes,
+  auth: { isAuthenticated, loading, user },
+  logout
+}) => {
   const guestLinks = (
     <>
       <Link to="/signup">Register</Link>
@@ -20,8 +24,8 @@ const Header = ({ classes, auth: { isAuthenticated, loading }, logout }) => {
 
   const authLinks = (
     <>
-      <Link to="/palette/new">Create Palette</Link>
-      <Link to="/me">My Palettes</Link>
+      <Link to="/palette/new">Create</Link>
+      <Link to="/me">{user && user.name.split(' ')[0]}</Link>
       <a onClick={logout} href="#!">
         Logout
       </a>
@@ -33,7 +37,7 @@ const Header = ({ classes, auth: { isAuthenticated, loading }, logout }) => {
       <div className={classes.logo}>
         <Link to="/">
           <img src={logo} alt="Company logo" />
-          Colourly
+          <span className={classes.logoTitle}>Colourly</span>
         </Link>
       </div>
       <div className={classes.links}>

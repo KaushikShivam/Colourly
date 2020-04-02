@@ -1,3 +1,4 @@
+import sizes from './sizes';
 export default {
   Header: {
     display: 'flex',
@@ -7,6 +8,12 @@ export default {
     '& a': {
       textDecoration: 'none',
       color: 'black'
+    },
+    [sizes.down('sm')]: {
+      '& span': {
+        display: 'none',
+        margin: '0'
+      }
     }
   },
 
