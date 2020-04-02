@@ -38,7 +38,7 @@ const Navbar = ({
       <div className={classes.logo}>
         <Link to="/">
           <img src={logo} alt="Company logo" />
-          Colourly
+          <span className={classes.logoTitle}>Colourly</span>
         </Link>
       </div>
       {showingAllColors && (

@@ -6,7 +6,13 @@ export default {
     alignItems: 'center',
     justifyContent: 'flex-start',
     height: '6vh',
-    color: 'white'
+    color: 'white',
+    [sizes.down('sm')]: {
+      '& span': {
+        display: 'none',
+        margin: '0'
+      }
+    }
   },
 
   logo: {
@@ -17,6 +23,9 @@ export default {
     height: '100%',
     display: 'flex',
     alignItems: 'center',
+    [sizes.down('sm')]: {
+      marginRight: 0
+    },
 
     '& a': {
       fontWeight: 'bold',
@@ -27,8 +36,14 @@ export default {
     },
     '& img': {
       width: '1.5rem',
-      height: '1.5rem',
-      marginRight: '10px'
+      height: '1.5rem'
+    }
+  },
+  logoTitle: {
+    marginLeft: '10px',
+    [sizes.down('sm')]: {
+      display: 'none',
+      margin: '0'
     }
   },
   selectContainer: {

@@ -1,3 +1,4 @@
+import sizes from './sizes';
 export default {
   PaletteFooter: {
     color: 'white',
@@ -7,7 +8,10 @@ export default {
     justifyContent: 'space-between',
     alignItems: 'center',
     fontWeight: 'bold',
-    padding: '0 1rem'
+    padding: '0 1rem',
+    [sizes.down('sm')]: {
+      height: '3vh'
+    }
   },
   user: {
     '& a': {
