@@ -1,6 +1,5 @@
 export default {
   Header: {
-    backgroundColor: '#A60311',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -18,14 +17,27 @@ export default {
     fontFamily: 'Roboto',
     height: '100%',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+
+    '& a': {
+      fontWeight: 'bold',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center'
+    },
+    '& img': {
+      width: '1.5rem',
+      height: '1.5rem',
+      marginRight: '10px'
+    }
   },
   links: {
     fontSize: '18px',
     padding: '0 13px;',
+    fontWeight: 'bold',
     '& a': {
+      color: 'white',
       textDecoration: 'none',
-      color: 'black',
       marginLeft: '13px'
     }
   }

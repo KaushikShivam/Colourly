@@ -32,7 +32,7 @@ const Header = ({ classes, auth: { isAuthenticated, loading }, logout }) => {
     <nav className={classes.Header}>
       <div className={classes.logo}>
         <Link to="/">
-          {/* <img src={logo} alt="Company logo" /> */}
+          <img src={logo} alt="Company logo" />
           Colourly
         </Link>
       </div>

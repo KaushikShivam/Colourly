@@ -7,6 +7,7 @@ export default {
   },
   container: {
     marginTop: '3rem',
+    marginBottom: '3rem',
     width: '90%',
     margin: '0 auto'
 
