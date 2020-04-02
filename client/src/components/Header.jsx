@@ -19,13 +19,12 @@ const Header = ({
     <>
       <Link to="/signup">Register</Link>
       <Link to="/login">Login</Link>
-      <Link to="/palette/new">Create</Link>
     </>
   );
 
   const authLinks = (
     <>
-      {/* <Link to="/palette/new">Create</Link> */}
+      <Link to="/palette/new">Create</Link>
       <Link to="/me">{user && user.name.split(' ')[0]}</Link>
       <a onClick={logout} href="#!">
         Logout
