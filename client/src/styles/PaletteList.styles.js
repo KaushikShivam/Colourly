@@ -5,11 +5,13 @@ export default {
     maxWidth: '1440px',
     width: '100%'
   },
+  header: {
+    color: 'white'
+  },
   container: {
     marginTop: '3rem',
     marginBottom: '3rem',
-    display: 'flex',
-    justifyContent: 'center',
+
     padding: '0 3rem',
 
     [sizes.down('lg')]: {

@@ -10,7 +10,7 @@ export default {
     }
   },
   colors: {
-    backgroundColor: '##D7D8D9',
+    backgroundColor: '#D7D8D9',
     height: '100px',
     overflow: 'hidden',
     borderRadius: '5px'
@@ -22,11 +22,17 @@ export default {
     margin: '0',
     paddingTop: '0.5rem',
     fontSize: '1rem',
-    position: 'relative'
+    fontWeight: 'medium',
+    position: 'relative',
+    color: '#0A3459'
   },
-  emoji: {
-    marginLeft: '0.5rem',
-    fontSize: '1.5rem'
+  author: {
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    color: '#104573',
+    '&:hover': {
+      textDecoration: 'underline'
+    }
   },
   miniColor: {
     height: '25%',
@@ -44,6 +50,8 @@ export default {
     top: '0px',
     right: '0px',
     padding: '10px',
+    borderRadius: '5px',
+
     zIndex: 10,
     opacity: 0,
     transition: 'all 0.3s ease-in-out'

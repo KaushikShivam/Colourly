@@ -46,6 +46,12 @@ const PaletteList = ({
     <div className={classes.root}>
       <Header />
       <div className={classes.container}>
+        {pathname.includes('/user') && palettes.length > 0 && (
+          <h2
+            className={classes.header}
+          >{`${palettes[0].user.name}'s Palettes`}</h2>
+        )}
+
         <div className={classes.palettes}>
           {palettes.map(palette => (
             <MiniPalette
