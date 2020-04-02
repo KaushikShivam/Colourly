@@ -45,9 +45,8 @@ const MiniPalette = ({
       )}
 
       <div className={classes.colors}>{miniColorBoxes}</div>
-      <h5 className={classes.title}>
-        {paletteName} <span onClick={handleUser}>{user.name}</span>
-      </h5>
+      <h5 className={classes.title}>{paletteName}</h5>
+      <span onClick={handleUser}>{user.name}</span>
     </div>
   );
 };

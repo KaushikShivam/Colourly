@@ -8,26 +8,36 @@ export default {
   container: {
     marginTop: '3rem',
     marginBottom: '3rem',
-    width: '90%',
-    margin: '0 auto'
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '0 3rem',
 
-    // [sizes.down('xl')]: {
-    //   width: '80%'
-    // },
-    // [sizes.down('xs')]: {
-    //   width: '75%'
-    // }
+    [sizes.down('lg')]: {
+      marginTop: '2rem',
+      marginBottom: '2rem',
+      padding: '0 2rem'
+    },
+    [sizes.down('xs')]: {
+      marginTop: '1rem',
+      marginBottom: '1rem',
+      padding: '0 1rem'
+    }
   },
   palettes: {
     width: '100%',
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 1fr)',
-    gridGap: '2rem'
-    // [sizes.down('md')]: {
-    //   gridTemplateColumns: 'repeat(2, 50%)'
-    // },
-    // [sizes.down('xs')]: {
-    //   gridTemplateColumns: 'repeat(1, 100%)'
-    // }
+    gridGap: '2rem',
+    [sizes.down('lg')]: {
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gridGap: '1.5rem'
+    },
+    [sizes.down('sm')]: {
+      gridTemplateColumns: 'repeat(2, 1fr)'
+    },
+    [sizes.down('xs')]: {
+      gridTemplateColumns: 'repeat(1, 1fr)',
+      gridGap: '1rem'
+    }
   }
 };
