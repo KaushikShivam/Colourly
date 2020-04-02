@@ -40,7 +40,7 @@ const PaletteFormNav = ({ open, handleSubmit, handleDrawerOpen }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Create A Palette
+            Create
           </Typography>
         </Toolbar>
         <div className={classes.navBtns}>
