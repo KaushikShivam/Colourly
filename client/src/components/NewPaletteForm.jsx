@@ -89,24 +89,22 @@ const NewPaletteForm = ({ savePalette, history, maxColors, createPalette }) => {
         </div>
         <Divider />
         <div className={classes.container}>
-          <Typography variant="h4" gutterBottom>
+          <Typography className={classes.designTitle} variant="h4" gutterBottom>
             Design Your Palette
           </Typography>
           <div className={classes.btns}>
             <Button
+              className={classes.btn1}
               variant="contained"
-              color="secondary"
               onClick={clearColors}
-              className={classes.button}
             >
               Clear Palette
             </Button>
             <Button
+              className={classes.btn2}
               variant="contained"
-              color="primary"
               onClick={addRandomColor}
               disabled={paletteFull}
-              className={classes.button}
             >
               Random Color
             </Button>

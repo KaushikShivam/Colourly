@@ -31,7 +31,7 @@ const App = ({ loadUser }) => {
     <SnackbarProvider>
       <Alert />
       <Switch>
-        <PrivateRoute
+        <Route
           exact
           path="/palette/new"
           // MARK: Add component instead of render for PrivateRoute.

@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
   drawerHeader: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '100%',
     padding: '0 8px',
     ...theme.mixins.toolbar,
@@ -52,11 +52,27 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     height: '100%'
   },
-  btns: {
-    width: '100%'
+  designTitle: {
+    color: '#104573'
   },
-  button: {
-    width: '50%'
+  btns: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-around'
+  },
+  btn1: {
+    backgroundColor: '#D92929',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: '#D92929'
+    }
+  },
+  btn2: {
+    backgroundColor: '#104573',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: '#104573'
+    }
   }
 }));
 

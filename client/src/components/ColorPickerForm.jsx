@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/styles';
 import styles from './../styles/ColorPickerForm.styles';
 
 const ColorPickerForm = ({ paletteFull, addNewColor, colors, classes }) => {
-  const [currentColor, setColor] = useState('teal');
+  const [currentColor, setColor] = useState('#104573');
   const [newName, setNewName] = useState('');
 
   const updateCurrentColor = newColor => {

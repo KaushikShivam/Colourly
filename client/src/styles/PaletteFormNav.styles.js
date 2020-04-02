@@ -47,11 +47,18 @@ const useStyles = makeStyles(theme => ({
     [sizes.down('xs')]: {
       margin: '0 0.2rem',
       padding: '0.3rem'
+    },
+    '&:hover': {
+      backgroundColor: '#104573'
     }
   },
   buttonCancel: {
     backgroundColor: '#D92929',
-    color: 'white'
+    color: 'white',
+
+    '&:hover': {
+      backgroundColor: '#D92929'
+    }
   },
   link: {
     textDecoration: 'none'
