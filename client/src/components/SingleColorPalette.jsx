@@ -65,10 +65,7 @@ const SingleColorPalette = ({
               <Link to={`/palette/${singlePalette.id}`}>Go Back</Link>
             </div>
           </div>
-          <PaletteFooter
-            paletteName={singlePalette.paletteName}
-            emoji={singlePalette.user.name}
-          />
+          <PaletteFooter {...singlePalette} />
         </>
       )}
     </div>
