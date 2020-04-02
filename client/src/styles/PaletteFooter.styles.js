@@ -1,14 +1,22 @@
 export default {
   PaletteFooter: {
-    backgroundColor: 'white',
+    color: 'white',
+    backgroundColor: '#A63352',
     height: '5vh',
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    padding: '0 1rem'
   },
-  emoji: {
-    fontSize: '1.5rem',
-    margin: '0 1rem'
+  user: {
+    '& a': {
+      fontSize: '1rem',
+      textDecoration: 'none',
+      color: 'rgba(255,255,255,0.9)',
+      '&:hover': {
+        color: 'white'
+      }
+    }
   }
 };

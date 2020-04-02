@@ -50,10 +50,7 @@ const Palette = ({ match, classes, fetchSinglePalette, singlePalette }) => {
       {singlePalette && (
         <>
           <div className={classes.PaletteColors}>{createColorBoxes()}</div>
-          <PaletteFooter
-            paletteName={singlePalette.paletteName}
-            emoji={singlePalette.user.name}
-          />
+          <PaletteFooter {...singlePalette} />
         </>
       )}
     </div>
