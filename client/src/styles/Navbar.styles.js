@@ -5,29 +5,48 @@ export default {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    height: '6vh'
+    height: '6vh',
+    color: 'white'
   },
 
   logo: {
     marginRight: '15px',
     padding: '0 13px',
     fontSize: '22px',
-    backgroundColor: '#eceff1',
     fontFamily: 'Roboto',
     height: '100%',
     display: 'flex',
     alignItems: 'center',
+
     '& a': {
-      textDecoration: 'none',
-      color: 'black'
+      fontWeight: 'bold',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      textDecoration: 'none'
     },
-    [sizes.down('xs')]: {
-      display: 'none'
+    '& img': {
+      width: '1.5rem',
+      height: '1.5rem',
+      marginRight: '10px'
     }
   },
   selectContainer: {
     marginLeft: 'auto',
-    marginRight: '1rem'
+    marginRight: '1rem',
+    color: 'white'
+  },
+  select: {
+    color: 'white',
+    '&:before': {
+      borderColor: 'white'
+    },
+    '&:after': {
+      borderColor: 'white'
+    }
+  },
+  icon: {
+    fill: 'white'
   },
 
   slider: {
@@ -38,12 +57,12 @@ export default {
       height: '8px'
     },
     '& .rc-slider-track': {
-      backgroundColor: 'transparent'
+      backgroundColor: 'white'
     },
     '& .rc-slider-handle, .rc-slider-handle:active, .rc-slider-handle:hover, .rc-slider-handle:focus': {
-      backgroundColor: 'green',
+      backgroundColor: '#104573',
       outline: 'none',
-      border: '2px solid green',
+      border: '2px solid #104573',
       boxShadow: 'none',
       width: '13px',
       height: '13px',

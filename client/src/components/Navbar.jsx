@@ -10,6 +10,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
+import logo from './../assets/logo.png';
+
 import 'rc-slider/assets/index.css';
 import styles from './../styles/Navbar.styles';
 
@@ -34,7 +36,10 @@ const Navbar = ({
   return (
     <header className={classes.Navbar}>
       <div className={classes.logo}>
-        <Link to="/">Colourly</Link>
+        <Link to="/">
+          <img src={logo} alt="Company logo" />
+          Colourly
+        </Link>
       </div>
       {showingAllColors && (
         <div>
@@ -51,7 +56,16 @@ const Navbar = ({
         </div>
       )}
       <div className={classes.selectContainer}>
-        <Select value={format} onChange={handleSelect}>
+        <Select
+          className={classes.select}
+          inputProps={{
+            classes: {
+              icon: classes.icon
+            }
+          }}
+          value={format}
+          onChange={handleSelect}
+        >
           <MenuItem value="hex">HEX - #ffffff</MenuItem>
           <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
           <MenuItem value="rgba">RGBA - rgb(255,255,255,1.0)</MenuItem>
