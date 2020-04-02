@@ -25,7 +25,6 @@ const PaletteFormNav = ({ open, handleSubmit, handleDrawerOpen }) => {
       <CssBaseline />
       <AppBar
         position="fixed"
-        color="default"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open
         })}
@@ -47,17 +46,15 @@ const PaletteFormNav = ({ open, handleSubmit, handleDrawerOpen }) => {
         <div className={classes.navBtns}>
           <Link to="/" className={classes.link}>
             <Button
-              className={classes.button}
+              className={(classes.button, classes.buttonCancel)}
               variant="contained"
-              color="secondary"
             >
-              Go Back
+              Cancel
             </Button>
           </Link>
           <Button
             className={classes.button}
             variant="contained"
-            color="primary"
             onClick={showForm}
           >
             Save

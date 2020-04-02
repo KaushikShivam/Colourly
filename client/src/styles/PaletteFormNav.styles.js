@@ -16,10 +16,12 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
+    backgroundColor: '#A63352',
+    color: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '64px'
+    height: '6vh'
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -40,10 +42,16 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: '0 0.5rem',
+    backgroundColor: '#104573',
+    color: 'white',
     [sizes.down('xs')]: {
       margin: '0 0.2rem',
       padding: '0.3rem'
     }
+  },
+  buttonCancel: {
+    backgroundColor: '#D92929',
+    color: 'white'
   },
   link: {
     textDecoration: 'none'
